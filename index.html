@@ -3,286 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>英語小日子 · Daily English</title>
-<meta name="description" content="個人化英文學習:單字、文法、影集對白、口說練習">
+<title>霧港奇談 · Fog Harbor Tales</title>
+<meta name="description" content="用英文破解霧港謎案的學習卡牌冒險">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#FAF7F1">
+<meta name="theme-color" content="#0E1520">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="英語小日子">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="霧港奇談">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="icon-192.png">
 <style>
 :root{
-  --bg:#FAF7F1; --card:#FFFFFF; --ink:#23262E; --ink2:#6B7280;
-  --line:#ECE7DD;
-  --blue:#2F6BFF; --blue-deep:#1E4FD8; --blue-soft:#EAF0FF; --blue-ink:#1B3FA8;
-  --amber:#E8890C; --amber-soft:#FFF3E0; --amber-ink:#9A5B00;
-  --ok:#2F6BFF; --ok-soft:#EAF0FF;       /* 正確 = 藍 + ✓(色弱友善) */
-  --bad:#D9670D; --bad-soft:#FFF0DE;      /* 錯誤 = 橘 + ✗(色弱友善) */
-  --r:22px; --shadow:0 10px 30px rgba(35,38,46,.07), 0 2px 6px rgba(35,38,46,.05);
+  --bg:#0E1520; --bg2:#121B29; --card:#1A2433; --card2:#223044; --line:#2C3B50;
+  --ink:#EAE5D6; --dim:#93A0B4; --faint:#5D6B80;
+  --amber:#F0A437; --amber-deep:#C97F1B; --amber-soft:#3A2D17;
+  --blue:#6B9AFF; --blue-deep:#3D6CD9; --blue-soft:#1B2A47;
+  --ok:#6B9AFF; --bad:#E07B2E;  /* 對=藍✓ 錯=橘✗,色弱友善 */
+  --r:20px; --shadow:0 10px 30px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
 html,body{margin:0; padding:0; background:var(--bg); color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",Inter,sans-serif;
-  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
-body{padding-bottom:110px; max-width:560px; margin:0 auto; min-height:100dvh}
+  font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased}
+body{max-width:560px; margin:0 auto; min-height:100dvh;
+  background:radial-gradient(120% 60% at 50% -10%, #1B2A40 0%, var(--bg) 55%)}
 button{font-family:inherit; border:none; cursor:pointer; background:none; color:inherit}
 input,textarea,select{font-family:inherit; font-size:16px; color:var(--ink)}
-h1,h2,h3{margin:0; font-weight:800}
-.en{font-family:Inter,-apple-system,"SF Pro Text",Roboto,sans-serif}
-
-/* ---------- 版面 ---------- */
-.view{display:none; padding:max(14px,env(safe-area-inset-top)) 18px 8px; animation:fadein .25s ease}
-.view.active{display:block}
-@keyframes fadein{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+h1,h2,h3{margin:0}
+.serif{font-family:"Noto Serif TC","Songti TC",PMingLiU,serif; letter-spacing:.06em}
+.en{font-family:Inter,-apple-system,Georgia,serif}
+.scr{display:none; padding:max(16px,env(safe-area-inset-top)) 18px max(26px,env(safe-area-inset-bottom)); animation:fog .35s ease}
+.scr.active{display:block}
+@keyframes fog{from{opacity:0; filter:blur(3px)}to{opacity:1; filter:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 
-.topbar{display:flex; align-items:center; justify-content:space-between; margin:6px 0 14px}
-.topbar h2{font-size:22px}
-.iconbtn{width:42px; height:42px; border-radius:14px; background:var(--card); box-shadow:var(--shadow);
-  display:flex; align-items:center; justify-content:center; font-size:19px}
-
-.card{background:var(--card); border-radius:var(--r); box-shadow:var(--shadow); padding:18px; margin-bottom:14px}
-.card.soft{background:var(--blue-soft); box-shadow:none}
-.muted{color:var(--ink2); font-size:13.5px}
-.tag{display:inline-block; padding:3px 10px; border-radius:999px; font-size:12.5px; font-weight:700;
-  background:var(--blue-soft); color:var(--blue-ink)}
-.tag.amber{background:var(--amber-soft); color:var(--amber-ink)}
-
-/* ---------- 按鈕 ---------- */
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); padding:18px; margin-bottom:14px}
+.muted{color:var(--dim); font-size:13.5px}
+.tag{display:inline-block; padding:3px 11px; border-radius:999px; font-size:12.5px; font-weight:700;
+  background:var(--blue-soft); color:var(--blue)}
+.tag.amber{background:var(--amber-soft); color:var(--amber)}
 .btn{display:flex; width:100%; align-items:center; justify-content:center; gap:8px;
-  padding:15px 18px; border-radius:18px; font-size:16.5px; font-weight:800;
-  background:var(--blue); color:#fff; box-shadow:0 6px 18px rgba(47,107,255,.32);
-  transition:transform .1s ease}
+  padding:15px 18px; border-radius:16px; font-size:16.5px; font-weight:800;
+  background:linear-gradient(180deg,#F4B254,var(--amber-deep)); color:#221502;
+  box-shadow:0 6px 20px rgba(240,164,55,.25); transition:transform .1s}
 .btn:active{transform:scale(.97)}
-.btn.ghost{background:var(--card); color:var(--blue-ink); box-shadow:var(--shadow)}
-.btn.amber{background:var(--amber); box-shadow:0 6px 18px rgba(232,137,12,.3)}
-.btn.small{width:auto; padding:9px 16px; font-size:14px; border-radius:13px}
-.btn[disabled]{opacity:.45; pointer-events:none}
-.chip{display:inline-flex; align-items:center; gap:6px; padding:9px 15px; margin:0 8px 8px 0;
-  border-radius:999px; background:var(--card); box-shadow:var(--shadow); font-size:14.5px; font-weight:700}
-.chip.on{background:var(--blue); color:#fff}
-
-/* ---------- 首頁 ---------- */
-.hero{background:linear-gradient(135deg,#2F6BFF 0%,#5B8CFF 60%,#7FA6FF 100%);
-  border-radius:26px; padding:22px 20px; color:#fff; margin-bottom:16px;
-  box-shadow:0 14px 34px rgba(47,107,255,.35)}
-.hero .hi{font-size:13px; opacity:.85; font-weight:700; letter-spacing:.4px}
-.hero h1{font-size:25px; margin:4px 0 14px}
-.hero .stats{display:flex; gap:10px}
-.hero .stat{flex:1; background:rgba(255,255,255,.16); border-radius:16px; padding:10px 12px; backdrop-filter:blur(4px)}
-.hero .stat b{display:block; font-size:21px; line-height:1.2}
-.hero .stat span{font-size:12px; opacity:.9}
-.modules{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px}
-.module{background:var(--card); border-radius:var(--r); box-shadow:var(--shadow); padding:16px 15px; text-align:left}
-.module .emo{font-size:27px; display:block; margin-bottom:6px}
-.module b{font-size:16px}
-.module p{margin:3px 0 0; font-size:12.5px; color:var(--ink2); line-height:1.45}
-.duebar{display:flex; align-items:center; gap:12px}
-.duebar .n{font-size:30px; font-weight:800; color:var(--blue-ink); min-width:46px; text-align:center}
-
-/* ---------- 底部導覽 ---------- */
-nav{position:fixed; left:50%; transform:translateX(-50%); bottom:max(14px,env(safe-area-inset-bottom));
-  width:min(540px,calc(100% - 24px)); background:rgba(255,255,255,.92); backdrop-filter:blur(14px);
-  border-radius:26px; box-shadow:0 12px 36px rgba(35,38,46,.16); display:flex; padding:8px; z-index:50}
-nav button{flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;
-  padding:8px 0 6px; border-radius:18px; font-size:11px; font-weight:700; color:var(--ink2)}
-nav button .emo{font-size:21px; line-height:1}
-nav button.on{background:var(--blue-soft); color:var(--blue-ink)}
-
-/* ---------- 表單 ---------- */
-.field{width:100%; padding:14px 16px; border-radius:16px; border:1.5px solid var(--line);
-  background:var(--card); outline:none; transition:border .15s}
-.field:focus{border-color:var(--blue)}
-textarea.field{min-height:120px; resize:vertical; line-height:1.6}
-.searchrow{display:flex; gap:10px}
-.searchrow .field{flex:1}
-.searchrow .btn{width:auto; padding:0 20px}
-
-/* ---------- 單字卡 ---------- */
-.wordhead{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
-.wordhead .w{font-size:30px; font-weight:800}
-.kk{color:var(--ink2); font-size:15px}
-.speakbtn{width:38px; height:38px; border-radius:12px; background:var(--blue-soft); color:var(--blue-ink);
-  font-size:17px; display:inline-flex; align-items:center; justify-content:center; flex:none}
-.sec{margin-top:14px}
-.sec h4{margin:0 0 7px; font-size:13.5px; color:var(--blue-ink); letter-spacing:.5px}
-.exrow{padding:11px 13px; background:var(--bg); border-radius:14px; margin-bottom:8px}
-.exrow .e{font-weight:600}
-.exrow .z{font-size:13.5px; color:var(--ink2)}
-.minirow{display:flex; align-items:flex-start; gap:8px; padding:9px 0; border-bottom:1px dashed var(--line)}
-.minirow:last-child{border-bottom:none}
-.minirow b{flex:none}
-.addw{margin-left:auto; flex:none; width:30px; height:30px; border-radius:10px; background:var(--amber-soft);
-  color:var(--amber-ink); font-size:17px; font-weight:800}
-
-/* ---------- 測驗 ---------- */
-.opt{display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:14px 16px;
-  border-radius:16px; background:var(--card); box-shadow:var(--shadow); margin-bottom:10px;
-  font-size:16px; font-weight:600; border:2px solid transparent}
-.opt .mk{flex:none; width:26px; height:26px; border-radius:9px; background:var(--bg);
-  display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800}
-.opt.correct{border-color:var(--ok); background:var(--ok-soft)}
-.opt.correct .mk{background:var(--ok); color:#fff}
-.opt.wrong{border-color:var(--bad); background:var(--bad-soft)}
-.opt.wrong .mk{background:var(--bad); color:#fff}
-.explain{border-left:4px solid var(--amber); background:var(--amber-soft); border-radius:0 14px 14px 0;
-  padding:12px 14px; font-size:14.5px; margin:6px 0 12px}
-.progress{height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin:4px 0 16px}
-.progress i{display:block; height:100%; background:var(--blue); border-radius:99px; transition:width .3s}
-.bigscore{text-align:center; padding:10px 0}
-.bigscore b{font-size:54px; color:var(--blue-ink)}
-
-/* ---------- 對話 ---------- */
-.chat{display:flex; flex-direction:column; gap:10px; margin-bottom:14px}
-.bub{max-width:82%; padding:11px 15px; border-radius:19px; box-shadow:var(--shadow); position:relative}
-.bub.ai{background:var(--card); border-bottom-left-radius:7px; align-self:flex-start}
-.bub.me{background:var(--blue); color:#fff; border-bottom-right-radius:7px; align-self:flex-end}
-.bub .hint{margin-top:6px; font-size:12.5px; color:var(--amber-ink); background:var(--amber-soft);
-  padding:5px 9px; border-radius:9px}
-.micbtn{width:84px; height:84px; border-radius:50%; background:var(--blue); color:#fff; font-size:32px;
-  box-shadow:0 10px 26px rgba(47,107,255,.4); display:flex; align-items:center; justify-content:center;
-  margin:0 auto; transition:transform .12s}
-.micbtn.rec{background:var(--amber); transform:scale(1.12); box-shadow:0 10px 26px rgba(232,137,12,.45)}
-.center{text-align:center}
+.btn.blue{background:linear-gradient(180deg,#7BA6FF,var(--blue-deep)); color:#fff;
+  box-shadow:0 6px 20px rgba(107,154,255,.25)}
+.btn.ghost{background:var(--card2); color:var(--ink); box-shadow:none; border:1px solid var(--line)}
+.btn.small{width:auto; padding:9px 16px; font-size:14px; border-radius:12px}
+.btn[disabled]{opacity:.4; pointer-events:none}
 .flexrow{display:flex; gap:10px; align-items:center}
 .spacer{flex:1}
-
-/* ---------- 切換開關 ---------- */
-.seg{display:flex; background:var(--line); border-radius:15px; padding:4px; margin-bottom:14px}
-.seg button{flex:1; padding:9px; border-radius:12px; font-weight:800; font-size:14px; color:var(--ink2)}
-.seg button.on{background:var(--card); color:var(--blue-ink); box-shadow:var(--shadow)}
-
-/* ---------- 彈窗 / 載入 ---------- */
-.overlay{position:fixed; inset:0; background:rgba(35,38,46,.45); z-index:90; display:none;
-  align-items:flex-end; justify-content:center; backdrop-filter:blur(3px)}
-.overlay.show{display:flex}
-.sheet{background:var(--card); width:min(560px,100%); border-radius:26px 26px 0 0; padding:24px 20px;
-  padding-bottom:max(24px,env(safe-area-inset-bottom)); max-height:88dvh; overflow:auto; animation:up .26s ease}
-@keyframes up{from{transform:translateY(40px); opacity:0}to{transform:none; opacity:1}}
-#loading{position:fixed; inset:0; z-index:99; background:rgba(250,247,241,.86); display:none;
-  flex-direction:column; align-items:center; justify-content:center; gap:14px; backdrop-filter:blur(2px)}
-#loading.show{display:flex}
-.spin{width:46px; height:46px; border-radius:50%; border:5px solid var(--blue-soft);
-  border-top-color:var(--blue); animation:rot .8s linear infinite}
-@keyframes rot{to{transform:rotate(360deg)}}
-#toast{position:fixed; left:50%; transform:translateX(-50%); bottom:120px; z-index:98;
-  background:var(--ink); color:#fff; padding:11px 20px; border-radius:999px; font-size:14px;
-  font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s; max-width:86%; text-align:center}
-#toast.show{opacity:1}
 .divider{height:1px; background:var(--line); margin:14px 0}
-a{color:var(--blue-ink)}
-.empty{text-align:center; padding:34px 10px; color:var(--ink2)}
-.empty .emo{font-size:42px; display:block; margin-bottom:8px}
+.center{text-align:center}
+.field{width:100%; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line);
+  background:var(--bg2); outline:none}
+.field:focus{border-color:var(--amber)}
+a{color:var(--blue)}
+
+/* 標題畫面 */
+/* ===== 圖片整合 ===== */
+.scene-img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:14px; display:block;
+  border:1px solid var(--line); box-shadow:0 8px 20px rgba(0,0,0,.45); margin-bottom:12px}
+.scene-img.tall{aspect-ratio:3/4; max-height:300px; margin:0 auto 12px}
+.portrait-img{width:74px; height:74px; object-fit:cover; border-radius:14px; flex:none;
+  border:1px solid var(--gold-dk); box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.portrait-lg{width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:16px; max-height:340px;
+  border:1px solid var(--gold-dk); box-shadow:0 8px 22px rgba(0,0,0,.55); margin-bottom:12px; display:block}
+.portrait-talk{width:150px; height:200px; object-fit:cover; border-radius:14px;
+  border:1px solid var(--gold-dk); box-shadow:0 8px 22px rgba(0,0,0,.55); display:inline-block}
+.enemy-img{width:96px; height:96px; object-fit:cover; border-radius:14px; flex:none;
+  border:1px solid var(--line); box-shadow:0 4px 14px rgba(107,154,255,.3)}
+.title-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+.title-bg-veil{position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg, rgba(11,16,24,.35) 0%, rgba(11,16,24,.2) 40%, rgba(11,16,24,.92) 100%)}
+.titlewrap{min-height:88dvh; display:flex; flex-direction:column; justify-content:center; text-align:center}
+.lighthouse{font-size:74px; filter:drop-shadow(0 0 26px rgba(240,164,55,.5)); animation:glow 3.2s ease-in-out infinite}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 14px rgba(240,164,55,.35))}50%{filter:drop-shadow(0 0 34px rgba(240,164,55,.7))}}
+.gametitle{font-size:42px; font-weight:900; margin:14px 0 4px; letter-spacing:.14em}
+.subtitle{color:var(--dim); letter-spacing:.32em; font-size:13px}
+
+/* 狀態列 */
+.statusbar{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap}
+.stat-pill{display:flex; align-items:center; gap:5px; background:var(--card); border:1px solid var(--line);
+  border-radius:999px; padding:6px 13px; font-size:13.5px; font-weight:800}
+.hpdots i{display:inline-block; width:9px; height:9px; border-radius:50%; margin-left:3px; background:var(--line)}
+.hpdots i.on{background:var(--amber)}
+.hpdots.san i.on{background:var(--blue)}
+
+/* 調查員 */
+.invcard{display:flex; gap:14px; align-items:center; text-align:left; width:100%;
+  background:var(--card); border:1.5px solid var(--line); border-radius:var(--r); padding:16px; margin-bottom:12px}
+.invcard.on{border-color:var(--amber); background:var(--card2)}
+.invcard .emo{font-size:40px}
+.invcard b{font-size:17px}
+.invcard p{margin:2px 0 0; font-size:13px; color:var(--dim); line-height:1.5}
+
+/* 劇情 */
+.story{font-size:16.5px; line-height:2; letter-spacing:.02em}
+.story .en-line{display:block; background:var(--bg2); border-left:3px solid var(--amber);
+  padding:10px 14px; border-radius:0 12px 12px 0; margin:10px 0; font-size:16px}
+.speakbtn{width:34px; height:34px; border-radius:11px; background:var(--blue-soft); color:var(--blue);
+  font-size:15px; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; flex:none}
+
+/* 答題 */
+.clue{background:var(--bg2); border:1px dashed var(--amber-deep); border-radius:14px; padding:13px 15px;
+  font-size:16.5px; margin:10px 0}
+.opt{display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:14px 16px;
+  border-radius:15px; background:var(--card); border:1.5px solid var(--line); margin-bottom:10px;
+  font-size:15.5px; font-weight:600}
+.opt .mk{flex:none; width:26px; height:26px; border-radius:9px; background:var(--bg2);
+  display:flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:800; color:var(--dim)}
+.opt.correct{border-color:var(--ok); background:var(--blue-soft)}
+.opt.correct .mk{background:var(--ok); color:#fff}
+.opt.wrong{border-color:var(--bad); background:#3A2412}
+.opt.wrong .mk{background:var(--bad); color:#fff}
+.opt.gone{opacity:.28; pointer-events:none; text-decoration:line-through}
+.explain{border-left:4px solid var(--amber); background:var(--amber-soft); border-radius:0 13px 13px 0;
+  padding:12px 14px; font-size:14.5px; margin:8px 0 12px}
+.progress{height:7px; background:var(--line); border-radius:99px; overflow:hidden; margin:6px 0 14px}
+.progress i{display:block; height:100%; background:linear-gradient(90deg,var(--amber),#F4C36F); transition:width .3s}
+
+/* 手牌 */
+.hand{display:flex; gap:9px; overflow-x:auto; padding:4px 0 8px; margin:4px 0}
+.pcard{flex:none; width:108px; background:linear-gradient(160deg,var(--card2),var(--card));
+  border:1.5px solid var(--line); border-radius:14px; padding:10px 10px 8px; text-align:left}
+.pcard b{font-size:14.5px; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pcard .fx{font-size:11px; color:var(--amber); font-weight:700; margin-top:3px; line-height:1.4}
+.pcard .zh{font-size:11.5px; color:var(--dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pcard.dusty{opacity:.45; filter:grayscale(.6)}
+.pcard.used{opacity:.3; pointer-events:none}
+.pcard:active{transform:scale(.96)}
+
+/* 符記 */
+.tokenpop{display:inline-flex; align-items:center; gap:6px; background:var(--card2);
+  border:1px solid var(--amber-deep); border-radius:999px; padding:5px 14px; font-weight:800; color:var(--amber)}
+
+/* 對話 */
+.chat{display:flex; flex-direction:column; gap:10px; margin:10px 0}
+.bub{max-width:84%; padding:11px 15px; border-radius:18px; border:1px solid var(--line)}
+.bub.ai{background:var(--card); border-bottom-left-radius:6px; align-self:flex-start}
+.bub.me{background:var(--blue-soft); border-color:var(--blue-deep); border-bottom-right-radius:6px; align-self:flex-end}
+.bub .hint{margin-top:6px; font-size:12.5px; color:var(--amber); background:var(--amber-soft); padding:5px 9px; border-radius:9px}
+.micbtn{width:80px; height:80px; border-radius:50%; background:linear-gradient(180deg,#7BA6FF,var(--blue-deep));
+  color:#fff; font-size:30px; box-shadow:0 8px 26px rgba(107,154,255,.35);
+  display:flex; align-items:center; justify-content:center; margin:0 auto; transition:transform .12s}
+.micbtn.rec{background:linear-gradient(180deg,#F4B254,var(--amber-deep)); transform:scale(1.12)}
+
+/* 怪物 */
+.enemy{display:flex; align-items:center; gap:14px}
+.enemy .emo{font-size:48px; filter:drop-shadow(0 0 14px rgba(107,154,255,.4))}
+.enemy .bar{height:10px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:6px}
+.enemy .bar i{display:block; height:100%; background:var(--bad); transition:width .3s}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+
+/* 彈窗 / 載入 */
+.overlay{position:fixed; inset:0; background:rgba(5,9,15,.72); z-index:90; display:none;
+  align-items:flex-end; justify-content:center; backdrop-filter:blur(4px)}
+.overlay.show{display:flex}
+.sheet{background:var(--card); border-top:1px solid var(--line); width:min(560px,100%);
+  border-radius:24px 24px 0 0; padding:24px 20px max(24px,env(safe-area-inset-bottom));
+  max-height:88dvh; overflow:auto; animation:up .26s ease}
+@keyframes up{from{transform:translateY(40px); opacity:0}to{transform:none; opacity:1}}
+#loading{position:fixed; inset:0; z-index:99; background:rgba(14,21,32,.88); display:none;
+  flex-direction:column; align-items:center; justify-content:center; gap:14px; backdrop-filter:blur(3px)}
+#loading.show{display:flex}
+.lamp{font-size:44px; animation:glow 1.6s ease-in-out infinite}
+#toast{position:fixed; left:50%; transform:translateX(-50%); bottom:34px; z-index:98;
+  background:var(--ink); color:#16202E; padding:11px 20px; border-radius:999px; font-size:14px;
+  font-weight:800; opacity:0; pointer-events:none; transition:opacity .25s; max-width:86%; text-align:center}
+#toast.show{opacity:1}
+.empty{text-align:center; padding:30px 10px; color:var(--dim)}
+.empty .emo{font-size:40px; display:block; margin-bottom:8px}
+.minirow{display:flex; align-items:flex-start; gap:8px; padding:9px 0; border-bottom:1px dashed var(--line)}
+.minirow:last-child{border-bottom:none}
+.backrow{display:flex; margin-bottom:10px}
+.backbtn{font-size:14px; font-weight:800; color:var(--dim); padding:6px 10px 6px 0}
 </style>
 </head>
 <body>
 
-<!-- ===== 首頁 ===== -->
-<section class="view active" id="view-home">
-  <div class="topbar">
-    <h2>英語小日子</h2>
-    <button class="iconbtn" onclick="openSettings()" aria-label="設定">⚙️</button>
-  </div>
-  <div class="hero">
-    <div class="hi" id="greet">HELLO</div>
-    <h1 id="greet2">今天也來學一點吧!</h1>
-    <div class="stats">
-      <div class="stat"><b id="st-streak">0</b><span>🔥 連續天數</span></div>
-      <div class="stat"><b id="st-words">0</b><span>📚 已學單字</span></div>
-      <div class="stat"><b id="st-acc">–</b><span>🎯 文法答對率</span></div>
-    </div>
-  </div>
-
-  <div class="card" id="due-card">
-    <div class="duebar">
-      <div class="n" id="due-n">0</div>
-      <div style="flex:1">
-        <b>今天要複習的單字</b>
-        <div class="muted" id="due-sub">按照間隔複習,記得更牢!</div>
-      </div>
-      <button class="btn small" onclick="startReview()">開始</button>
-    </div>
-    <div class="divider"></div>
-    <div class="duebar">
-      <div class="n" id="wrong-n" style="color:var(--amber-ink)">0</div>
-      <div style="flex:1">
-        <b>錯題本待複習</b>
-        <div class="muted">把不熟的文法觀念補起來</div>
-      </div>
-      <button class="btn small amber" onclick="goErrbook()">去看看</button>
-    </div>
-  </div>
-
-  <div class="card" id="daily-card"></div>
-
-  <div class="modules">
-    <button class="module" onclick="showView('vocab')"><span class="emo">📖</span><b>單字學習</b><p>查單字、建立單字庫</p></button>
-    <button class="module" onclick="showView('grammar')"><span class="emo">✏️</span><b>文法練習</b><p>AI 出題、詳細解析</p></button>
-    <button class="module" onclick="showView('drama')"><span class="emo">🎬</span><b>影集對白</b><p>逐句拆解道地說法</p></button>
-    <button class="module" onclick="showView('speak')"><span class="emo">🎙️</span><b>口說練習</b><p>情境對話、AI 回饋</p></button>
+<!-- 標題 -->
+<section class="scr active" id="scr-title">
+  <img class="title-bg" src="img/bg-title.jpg" alt="" onerror="this.style.display='none'">
+  <div class="title-bg-veil"></div>
+  <div class="titlewrap" style="position:relative; z-index:2">
+    <div class="lighthouse">🗼</div>
+    <h1 class="gametitle serif">霧港奇談</h1>
+    <div class="subtitle serif">FOG HARBOR TALES · 1926</div>
+    <p class="muted" style="margin:22px auto 26px; max-width:300px">霧從未散去。失蹤的燈塔守、聽不懂的耳語——<br>唯有讀懂英文的人,能在霧中前行。</p>
+    <button class="btn" onclick="enterGame()">⚓ 進入霧港</button>
+    <div style="height:10px"></div>
+    <button class="btn ghost" onclick="openSettings()">⚙️ 設定</button>
   </div>
 </section>
 
-<!-- ===== 單字 ===== -->
-<section class="view" id="view-vocab">
-  <div class="topbar"><h2>📖 單字學習</h2><button class="iconbtn" onclick="showView('home')" aria-label="回首頁">🏠</button></div>
-  <div class="seg">
-    <button id="vt-lookup" class="on" onclick="vocabTab('lookup')">查單字</button>
-    <button id="vt-lib" onclick="vocabTab('lib')">我的單字庫</button>
-  </div>
-  <div id="vocab-lookup">
-    <div class="searchrow">
-      <input class="field en" id="word-input" placeholder="輸入英文單字,例如 weather" autocomplete="off" autocapitalize="off">
-      <button class="btn" onclick="lookupWord()">查詢</button>
-    </div>
-    <div id="word-result" style="margin-top:14px"></div>
-  </div>
-  <div id="vocab-lib" style="display:none"></div>
+<!-- 調查員選擇 -->
+<section class="scr" id="scr-char">
+  <h2 class="serif" style="font-size:22px; margin-bottom:6px">選擇你的調查員</h2>
+  <p class="muted" style="margin:0 0 16px">屬性會隨著答題成長。調查=單字 · 意志=文法 · 口才=口說</p>
+  <div id="char-list"></div>
+  <button class="btn" id="char-go" disabled onclick="confirmChar()">開始調查 →</button>
 </section>
 
-<!-- ===== 文法 ===== -->
-<section class="view" id="view-grammar">
-  <div class="topbar"><h2>✏️ 文法練習</h2><button class="iconbtn" onclick="showView('home')" aria-label="回首頁">🏠</button></div>
-  <div id="grammar-body"></div>
-</section>
+<!-- 事務所(主畫面) -->
+<section class="scr" id="scr-hub"></section>
 
-<!-- ===== 對白 ===== -->
-<section class="view" id="view-drama">
-  <div class="topbar"><h2>🎬 影集對白學習</h2><button class="iconbtn" onclick="showView('home')" aria-label="回首頁">🏠</button></div>
-  <div id="drama-body"></div>
-</section>
+<!-- 冒險進行 -->
+<section class="scr" id="scr-play"></section>
 
-<!-- ===== 口說 ===== -->
-<section class="view" id="view-speak">
-  <div class="topbar"><h2>🎙️ 口說練習</h2><button class="iconbtn" onclick="showView('home')" aria-label="回首頁">🏠</button></div>
-  <div id="speak-body"></div>
-</section>
+<!-- 牌庫 -->
+<section class="scr" id="scr-deck"></section>
 
-<!-- 底部導覽 -->
-<nav id="tabbar">
-  <button data-v="home" class="on"><span class="emo">🏠</span>首頁</button>
-  <button data-v="vocab"><span class="emo">📖</span>單字</button>
-  <button data-v="grammar"><span class="emo">✏️</span>文法</button>
-  <button data-v="drama"><span class="emo">🎬</span>對白</button>
-  <button data-v="speak"><span class="emo">🎙️</span>口說</button>
-</nav>
+<!-- 俚語手帳 -->
+<section class="scr" id="scr-slang"></section>
 
-<!-- API Key 引導 -->
+<!-- API Key -->
 <div class="overlay" id="key-overlay">
   <div class="sheet">
-    <h3 style="font-size:20px">🔑 第一次使用,先設定 AI 金鑰</h3>
-    <p class="muted" style="margin:10px 0 4px">這個 app 使用 Google Gemini AI。金鑰只會存在<b>你自己的手機</b>裡,不會上傳到任何地方。</p>
-    <ol style="font-size:14px; color:var(--ink2); padding-left:20px; margin:8px 0 14px; line-height:1.9">
+    <h3 style="font-size:20px">🔑 點亮燈塔之前…</h3>
+    <p class="muted" style="margin:10px 0 4px">本遊戲由 Google Gemini AI 驅動劇情與出題。金鑰只存在<b>你的手機</b>,不會上傳。</p>
+    <ol style="font-size:14px; color:var(--dim); padding-left:20px; margin:8px 0 14px; line-height:1.9">
       <li>打開 <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>(免費)</li>
-      <li>用 Google 帳號登入 → 點「Create API key」</li>
-      <li>複製金鑰,貼到下面的框框</li>
+      <li>登入 → 「Create API key」→ 複製</li>
+      <li>貼到下面</li>
     </ol>
-    <input class="field en" id="key-input" placeholder="貼上你的 API key(AIza 開頭)" autocomplete="off">
+    <input class="field en" id="key-input" placeholder="貼上 API key(AIza 開頭)" autocomplete="off">
     <div style="height:12px"></div>
-    <button class="btn" onclick="saveKey()">儲存,開始學習 🚀</button>
+    <button class="btn" onclick="saveKey()">點亮燈塔 🔦</button>
   </div>
 </div>
 
@@ -291,769 +242,771 @@ a{color:var(--blue-ink)}
   <div class="sheet" id="settings-sheet"></div>
 </div>
 
-<!-- 載入 / 提示 -->
-<div id="loading"><div class="spin"></div><div id="loading-text" class="muted" style="font-weight:700">AI 思考中…</div></div>
+<div id="loading"><div class="lamp">🏮</div><div class="muted" id="loading-text" style="font-weight:700">霧正在聚集…</div></div>
 <div id="toast"></div>
 
 <script>
-/* ================= 基礎:資料儲存 ================= */
+/* ================= 基礎 ================= */
 const DAY = 86400000;
-const SRS_INTERVALS = [1, 3, 7, 14]; // 天
+const SRS = [1,3,7,14];
+const LEVELS = ['國中基礎','國中進階','高中入門'];
 function defaults(){ return {
-  words: [],            // {word, zh, data, addedAt, srs:{level,next}}
-  wrong: [],            // {q, options, answer, explain, topic, ts}
-  stats: {lookups:0, grammarTotal:0, grammarCorrect:0, sessions:0, speakSessions:0},
-  streak: {last:'', count:0},
-  daily: null,          // {date, pack}
-  settings: {level:'國小三、四年級', textModel:'gemini-2.5-flash',
-             liveModel:'gemini-2.5-flash-native-audio-preview-09-2025'}
+  player:null, // {char, stats:{inv,will,talk}, hp,maxhp,san,maxsan, xp}
+  deck:[],     // {word, zh, pos, example_en, example_zh, usage, dusty, restedUntil, srs:{level,next}}
+  nightmares:[], // {q,options,answer,explain,topic,next,fails}
+  slang:[],    // {phrase, zh, example_en, example_zh}
+  prog:{ch:1, enc:0, clues:0, done:false},
+  daily:null,
+  streak:{last:'',count:0},
+  gstats:{correct:0,total:0,purified:0},
+  settings:{level:'國中基礎', textModel:'gemini-2.5-flash'}
 };}
 let DB = defaults();
-try{ const raw = localStorage.getItem('ela_data'); if(raw) DB = Object.assign(defaults(), JSON.parse(raw)); }catch(e){}
-function save(){ localStorage.setItem('ela_data', JSON.stringify(DB)); }
+try{ const r = localStorage.getItem('fog_data'); if(r) DB = Object.assign(defaults(), JSON.parse(r)); }catch(e){}
+function save(){ localStorage.setItem('fog_data', JSON.stringify(DB)); }
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function esc(s){ return String(s??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function endOfDay(){ const d=new Date(); d.setHours(23,59,59,0); return d.getTime(); }
+function esc(s){ return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+// 圖片元件:載入失敗自動隱藏,露出底下的 emoji/SVG fallback
+function img(src, cls, alt){ return src?`<img class="${cls}" src="img/${src}" alt="${esc(alt||'')}" loading="lazy" onerror="this.style.display='none'">`:''; }
+function qesc(s){ return esc(s).replace(/'/g,"\\'"); }
 function $(id){ return document.getElementById(id); }
+function rnd(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-/* ================= 提示與載入 ================= */
 let toastTimer;
-function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'), 2600); }
-function loading(on, text){ $('loading-text').textContent = text||'AI 思考中…';
-  $('loading').classList.toggle('show', !!on); }
-async function withLoading(text, fn){
-  loading(true, text);
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2600); }
+function loading(on,txt){ $('loading-text').textContent=txt||'霧正在聚集…'; $('loading').classList.toggle('show',!!on); }
+async function withLoading(txt,fn){
+  loading(true,txt);
   try{ return await fn(); }
-  catch(e){
-    console.error(e);
-    if(String(e.message).includes('NO_KEY')) { $('key-overlay').classList.add('show'); }
-    else if(String(e.message).includes('API 400') && String(e.message).includes('API key')) toast('⚠️ API 金鑰無效,請到設定重新輸入');
-    else if(String(e.message).includes('API 429')) toast('⚠️ 今天的免費額度用完了,明天再來或稍後重試');
-    else if(!navigator.onLine) toast('⚠️ 沒有網路連線,AI 功能需要上網');
-    else toast('⚠️ 出了點問題:' + String(e.message).slice(0,80));
+  catch(e){ console.error(e);
+    if(String(e.message).includes('NO_KEY')) $('key-overlay').classList.add('show');
+    else if(String(e.message).includes('429')) toast('⚠️ 今日 AI 額度用完了,稍後或明天再試');
+    else if(!navigator.onLine) toast('⚠️ 沒有網路,霧港需要連線才能運作');
+    else toast('⚠️ 霧太濃了(發生錯誤),再試一次');
     return null;
   } finally{ loading(false); }
 }
 
-/* ================= Gemini API ================= */
-function apiKey(){ return localStorage.getItem('ela_key') || ''; }
+function apiKey(){ return localStorage.getItem('fog_key')||''; }
 async function gemini(prompt, opts={}){
-  const key = apiKey(); if(!key) throw new Error('NO_KEY');
-  const model = opts.model || DB.settings.textModel || 'gemini-2.5-flash';
-  const body = { contents: [{role:'user', parts:[{text: prompt}]}] };
-  if(opts.system) body.systemInstruction = {parts:[{text: opts.system}]};
-  body.generationConfig = {};
-  if(opts.json !== false) body.generationConfig.responseMimeType = 'application/json';
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
-    {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
-  if(!r.ok){ const t = await r.text(); throw new Error('API '+r.status+' '+t.slice(0,300)); }
-  const d = await r.json();
-  let text = (d.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('');
-  if(opts.json !== false){
-    text = text.replace(/^```json\s*/i,'').replace(/```\s*$/,'').trim();
-    return JSON.parse(text);
-  }
+  const key=apiKey(); if(!key) throw new Error('NO_KEY');
+  const model=opts.model||DB.settings.textModel;
+  const body={contents:[{role:'user',parts:[{text:prompt}]}], generationConfig:{}};
+  if(opts.system) body.systemInstruction={parts:[{text:opts.system}]};
+  if(opts.json!==false) body.generationConfig.responseMimeType='application/json';
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,
+    {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok){ const t=await r.text(); throw new Error('API '+r.status+' '+t.slice(0,200)); }
+  const d=await r.json();
+  let text=(d.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('');
+  if(opts.json!==false){ text=text.replace(/^```json\s*/i,'').replace(/```\s*$/,'').trim(); return JSON.parse(text); }
   return text;
 }
 
-/* ================= 朗讀 / 語音輸入 ================= */
-let voicesReady = [];
-function loadVoices(){ voicesReady = speechSynthesis.getVoices(); }
-if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-function speak(text, rate){
-  if(!('speechSynthesis' in window)) return toast('此瀏覽器不支援朗讀');
+/* ====== 語音 ====== */
+let voices=[];
+function loadVoices(){ voices=speechSynthesis.getVoices(); }
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+function speak(t,rate){
+  if(!('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'en-US'; u.rate = rate || 0.92;
-  const v = voicesReady.find(v=>/en[-_]US/i.test(v.lang)) || voicesReady.find(v=>/^en/i.test(v.lang));
-  if(v) u.voice = v;
+  const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=rate||0.92;
+  const v=voices.find(v=>/en[-_]US/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang));
+  if(v) u.voice=v;
   speechSynthesis.speak(u);
 }
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SRX = window.SpeechRecognition||window.webkitSpeechRecognition;
 
-/* ================= 導覽 ================= */
-function showView(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  $('view-'+name).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===name));
+/* ====== 畫面切換 ====== */
+function showScr(n){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('active'));
+  $('scr-'+n).classList.add('active');
   window.scrollTo(0,0);
-  if(name==='home') renderHome();
-  if(name==='grammar' && !grammarState.active) renderGrammarSetup();
-  if(name==='drama' && !$('drama-body').innerHTML) renderDrama();
-  if(name==='speak' && !speakState.active) renderSpeakSetup();
 }
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>showView(b.dataset.v));
 
-/* ================= 首頁 ================= */
-function dueWords(){ const now=Date.now(); return DB.words.filter(w=>w.srs && w.srs.next<=now); }
+/* ================= 角色 ================= */
+const CHARS=[
+  {id:'rep', emo:'📰', img:'char-rep.jpg', name:'外電記者 林晚晴', desc:'靠翻譯外電維生,調查力出眾。', stats:{inv:3,will:1,talk:2}, hp:5, san:6},
+  {id:'doc', emo:'🩺', img:'char-doc.jpg', name:'港區醫師 沈鶴年', desc:'讀慣原文醫書,意志堅定。', stats:{inv:1,will:3,talk:2}, hp:6, san:5},
+  {id:'stu', emo:'🎓', img:'char-stu.jpg', name:'返鄉學生 阿海', desc:'剛從外地學成歸來,能言善道。', stats:{inv:2,will:1,talk:3}, hp:5, san:5},
+];
+let pickedChar=null;
+function renderCharSelect(){
+  $('char-list').innerHTML = CHARS.map(c=>`
+    <button class="invcard" id="ch-${c.id}" onclick="pickChar('${c.id}')">
+      <span class="emo" style="position:relative">${img(c.img,'portrait-img',c.name)}${c.img?'':c.emo}</span>
+      <span><b>${c.name}</b><p>${c.desc}</p>
+      <p style="color:var(--amber)">🔍 調查 ${c.stats.inv} · 🧠 意志 ${c.stats.will} · 💬 口才 ${c.stats.talk} · ❤️ ${c.hp} · 🌀 ${c.san}</p></span>
+    </button>`).join('');
+  showScr('char');
+}
+function pickChar(id){ pickedChar=id;
+  CHARS.forEach(c=>$('ch-'+c.id).classList.toggle('on', c.id===id));
+  $('char-go').disabled=false;
+}
+function confirmChar(){
+  const c=CHARS.find(x=>x.id===pickedChar);
+  DB.player={char:c.id, stats:{...c.stats}, hp:c.hp, maxhp:c.hp, san:c.san, maxsan:c.san, xp:0};
+  save(); renderHub(); showScr('hub');
+}
+function charOf(){ return CHARS.find(c=>c.id===DB.player.char); }
+
+/* ================= 戰役內容(第一章骨架) ================= */
+const CH1={
+  title:'第一章 · 消失的燈塔守',
+  intro:`一九二六年,霧港。\n燈塔守<b>周百川</b>已經七天沒有點燈。港務局的人不敢上去——他們說,塔裡有「用外國話低語的東西」。\n你接下了這份委託。桌上只留著一本英文日誌、半張船票,和一股揮之不去的潮腥味。`,
+  encounters:[
+    {type:'investigate', emo:'🗂️', img:'scene-archive.jpg', scene:'港務局舊檔案室', flavor:'灰塵在油燈下飛舞。周百川的英文日誌攤開在桌上,有些字句被海水暈開了——你必須讀懂它們。', n:3, theme:'燈塔守的日誌:天氣、海象、他開始聽見的怪聲'},
+    {type:'combat', emo:'👤', img:'scene-dock.jpg', scene:'霧中碼頭', enemy:{name:'霧影', emo:'🌫️', hp:3}, flavor:'回事務所的路上,霧驟然濃了。一個輪廓不明的影子攔住你——它開口,竟是破碎的英文。答對文法,你的話語就是驅散它的火光。', n:3},
+    {type:'talk', emo:'🍺', img:'scene-tavern.jpg', npcImg:'npc-joe.jpg', scene:'燈塔下的酒館「半錨」', npc:'酒保 Old Joe(只說英文的怪人)', flavor:'酒館裡只剩酒保 Old Joe。據說周百川失蹤前夜在這裡喝了最後一杯。Joe 不說中文——你得用英文,問出那晚發生的事。', mission:'問出周百川失蹤那晚的去向與異狀'},
+    {type:'investigate', emo:'🗼', img:'scene-lighthouse.jpg', scene:'燈塔內部', flavor:'鐵門虛掩。旋梯牆上,有人用炭筆寫滿英文警語,越往上,字跡越潦草。', n:3, theme:'牆上的英文警語:警告、不要聽、霧裡的東西'},
+  ],
+  boss:{name:'霧之低語者', emo:'🐙', img:'scene-lantern.jpg', hp:4, flavor:'塔頂。燈室的玻璃外,霧凝成了形。它以千百種聲音同時低語——你聽懂的每一句,都是刺向它的光。', n:4},
+  cluesForTrue:7,
+};
+const ENC_TOTAL = CH1.encounters.length+1;
+
+/* ================= 事務所(Hub) ================= */
 function updateStreak(){
-  const t = todayStr(); const s = DB.streak;
-  if(s.last === t) return;
-  const y = new Date(Date.now()-DAY);
-  const ys = y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
-  s.count = (s.last === ys) ? s.count+1 : 1;
-  s.last = t; save();
+  const t=todayStr(), s=DB.streak;
+  if(s.last===t) return;
+  const y=new Date(Date.now()-DAY);
+  const ys=y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
+  s.count=(s.last===ys)?s.count+1:1; s.last=t; save();
 }
-function renderHome(){
-  const h = new Date().getHours();
-  $('greet').textContent = h<5?'GOOD NIGHT':h<12?'GOOD MORNING':h<18?'GOOD AFTERNOON':'GOOD EVENING';
-  $('greet2').textContent = h<12?'早安,今天也來學一點吧!':h<18?'午安,休息一下學英文?':'晚安,睡前複習最有效!';
-  $('st-streak').textContent = DB.streak.count;
-  $('st-words').textContent = DB.words.length;
-  $('st-acc').textContent = DB.stats.grammarTotal ? Math.round(DB.stats.grammarCorrect/DB.stats.grammarTotal*100)+'%' : '–';
-  const due = dueWords().length;
-  $('due-n').textContent = due;
-  $('due-sub').textContent = due ? '趁記憶還新鮮,快速複習一輪!' : '目前沒有到期的單字,輕鬆 ✓';
-  $('wrong-n').textContent = DB.wrong.length;
-  renderDaily();
-}
-function renderDaily(){
-  const c = $('daily-card');
-  const d = DB.daily;
-  if(d && d.date === todayStr() && d.pack){
-    const p = d.pack;
-    c.innerHTML = `<div class="flexrow"><b style="font-size:17px">🎁 今日學習包</b><span class="spacer"></span><span class="tag">${esc(d.date)}</span></div>
-      <div class="sec"><h4>今日推薦單字</h4>${(p.words||[]).map(w=>`
-        <div class="minirow"><b class="en">${esc(w.word)}</b><span class="muted">${esc(w.zh)}</span>
-          <button class="speakbtn" style="margin-left:auto" onclick="speak('${esc(w.word).replace(/'/g,"\\'")}')">🔊</button>
-          <button class="addw" onclick="addWordQuick('${esc(w.word).replace(/'/g,"\\'")}','${esc(w.zh).replace(/'/g,"\\'")}',this)">＋</button></div>`).join('')}
-      </div>
-      <div class="sec"><h4>每日一句</h4>
-        <div class="exrow"><div class="e en">${esc(p.quote?.en||'')} <button class="speakbtn" onclick="speak('${esc(p.quote?.en||'').replace(/'/g,"\\'")}')">🔊</button></div>
-        <div class="z">${esc(p.quote?.zh||'')}</div>
-        <div class="z" style="margin-top:5px">💡 ${esc(p.quote?.note||'')}</div></div>
-      </div>
-      <div class="sec"><h4>今日小提醒</h4><div class="muted" style="font-size:14px">${esc(p.tip||'')}</div></div>`;
-  }else{
-    c.innerHTML = `<div class="flexrow"><b style="font-size:17px">🎁 今日學習包</b></div>
-      <p class="muted" style="margin:8px 0 12px">AI 會根據你學過的單字和常錯的文法,每天生成 3 個新單字、1 句道地金句和學習提醒。</p>
-      <button class="btn" onclick="genDaily()">✨ 生成今天的內容</button>`;
-  }
-}
-async function genDaily(){
-  const known = DB.words.slice(-30).map(w=>w.word).join(', ') || '(還沒學過單字)';
-  const weak = [...new Set(DB.wrong.map(w=>w.topic))].join('、') || '(還沒有錯題紀錄)';
-  const pack = await withLoading('正在準備今天的學習包…', ()=>gemini(
-`你是台灣的英文家教。學生程度:${DB.settings.level},單字量還可以但文法和口說較弱。
-學生已學過的單字:${known}
-學生常錯的文法主題:${weak}
-請生成今日學習包,回傳 JSON(繁體中文,台灣用語):
-{"words":[{"word":"適合程度的實用新單字(避開已學過的)","zh":"中文意思"}] (恰好3個),
-"quote":{"en":"一句影集風格的道地日常英文短句(8-14字)","zh":"中文翻譯","note":"一句話說明這句的使用情境或口語重點"},
-"tip":"針對學生弱點的一段文法或學習小提醒(60字內)"}`));
-  if(!pack) return;
-  DB.daily = {date: todayStr(), pack}; save(); renderDaily();
-}
-
-/* ================= 單字模組 ================= */
-function vocabTab(t){
-  $('vt-lookup').classList.toggle('on', t==='lookup');
-  $('vt-lib').classList.toggle('on', t==='lib');
-  $('vocab-lookup').style.display = t==='lookup'?'':'none';
-  $('vocab-lib').style.display = t==='lib'?'':'none';
-  if(t==='lib') renderLibrary();
-}
-async function lookupWord(givenWord){
-  const w = (givenWord || $('word-input').value).trim();
-  if(!w) return toast('先輸入一個英文單字吧');
-  const data = await withLoading(`查詢 ${w} 中…`, ()=>gemini(
-`你是台灣的英文老師,為程度「${DB.settings.level}」的學生詳細解說單字「${w}」。
-回傳 JSON(說明全用繁體中文台灣用語):
-{"word":"${w}","kk":"KK音標,如 [ˋwɛðɚ]",
-"meanings":[{"pos":"詞性如 n. / v. / adj.","zh":"中文意思"}],
-"examples":[{"en":"例句","zh":"翻譯","level":"基礎|進階|挑戰"}] (恰好3句,由淺入深),
-"usage":"用法說明:常見搭配、介系詞、片語(80字內)",
-"synonyms":[{"word":"同義詞","diff":"和原字的差異(20字內)"}] (2-3個),
-"confusable":[{"word":"易混淆字","diff":"差在哪(20字內)"}] (1-2個)}`));
-  if(!data) return;
-  DB.stats.lookups++;
-  saveWordToLib(data);
-  $('word-result').innerHTML = wordCard(data, true);
-  if(givenWord) { showView('vocab'); vocabTab('lookup'); $('word-input').value = w; }
-}
-function saveWordToLib(data){
-  const key = data.word.toLowerCase();
-  let item = DB.words.find(x=>x.word.toLowerCase()===key);
-  if(item){ item.data = data; item.zh = data.meanings?.[0]?.zh || item.zh; }
-  else DB.words.push({word:data.word, zh:data.meanings?.[0]?.zh||'', data, addedAt:Date.now(),
-                      srs:{level:0, next: Date.now()+SRS_INTERVALS[0]*DAY}});
-  save();
-}
-function addWordQuick(word, zh, btn){
-  const key = word.toLowerCase();
-  if(!DB.words.find(x=>x.word.toLowerCase()===key)){
-    DB.words.push({word, zh, data:null, addedAt:Date.now(), srs:{level:0, next:Date.now()+SRS_INTERVALS[0]*DAY}});
-    save(); toast(`已加入單字庫:${word} ✓`);
-  } else toast('這個字已經在單字庫囉');
-  if(btn){ btn.textContent='✓'; btn.disabled=true; }
-}
-function wordCard(d, saved){
-  const sp = t=>`<button class="speakbtn" onclick="speak('${esc(t).replace(/'/g,"\\'")}')">🔊</button>`;
-  return `<div class="card">
-    <div class="wordhead"><span class="w en">${esc(d.word)}</span>${sp(d.word)}<span class="kk en">${esc(d.kk||'')}</span>
-      ${saved?'<span class="tag amber">已存入單字庫 ✓</span>':''}</div>
-    <div class="sec"><h4>中文意思</h4>${(d.meanings||[]).map(m=>`<div class="minirow"><b>${esc(m.pos)}</b><span>${esc(m.zh)}</span></div>`).join('')}</div>
-    <div class="sec"><h4>例句(由淺入深)</h4>${(d.examples||[]).map(e=>`
-      <div class="exrow"><span class="tag">${esc(e.level||'')}</span>
-        <div class="e en" style="margin-top:5px">${esc(e.en)} ${sp(e.en)}</div><div class="z">${esc(e.zh)}</div></div>`).join('')}</div>
-    <div class="sec"><h4>用法說明</h4><div style="font-size:14.5px">${esc(d.usage||'')}</div></div>
-    <div class="sec"><h4>同義詞</h4>${(d.synonyms||[]).map(s=>`<div class="minirow"><b class="en">${esc(s.word)}</b><span class="muted">${esc(s.diff)}</span></div>`).join('')}</div>
-    <div class="sec"><h4>易混淆字</h4>${(d.confusable||[]).map(s=>`<div class="minirow"><b class="en">${esc(s.word)}</b><span class="muted">${esc(s.diff)}</span></div>`).join('')}</div>
+function dueCards(){ const n=Date.now(); return DB.deck.filter(c=>c.srs.next<=n); }
+function dueNightmares(){ const n=Date.now(); return DB.nightmares.filter(x=>x.next<=n); }
+function statusBar(){
+  const p=DB.player;
+  const dots=(cur,max,cls)=>`<span class="hpdots ${cls}">`+Array.from({length:max},(_,i)=>`<i class="${i<cur?'on':''}"></i>`).join('')+`</span>`;
+  return `<div class="statusbar">
+    <span class="stat-pill">❤️ ${dots(p.hp,p.maxhp,'')}</span>
+    <span class="stat-pill">🌀 ${dots(p.san,p.maxsan,'san')}</span>
+    <span class="stat-pill">🔍${p.stats.inv} 🧠${p.stats.will} 💬${p.stats.talk}</span>
   </div>`;
 }
-function renderLibrary(){
-  const c = $('vocab-lib');
-  if(!DB.words.length){ c.innerHTML = `<div class="empty"><span class="emo">🌱</span>單字庫還是空的<br>去「查單字」開始累積吧!</div>`; return; }
-  const now = Date.now();
-  const due = dueWords().length;
-  const list = [...DB.words].sort((a,b)=>a.srs.next-b.srs.next);
-  c.innerHTML = `
-    ${due?`<button class="btn" style="margin-bottom:14px" onclick="startReview()">🔁 複習到期單字(${due} 個)</button>`:''}
-    <div class="card">${list.map((w,i)=>{
-      const d = Math.ceil((w.srs.next-now)/DAY);
-      const dueTxt = w.srs.next<=now ? '<span class="tag amber">該複習了</span>' : `<span class="muted" style="font-size:12px">${d} 天後複習</span>`;
-      return `<div class="minirow"><b class="en">${esc(w.word)}</b><span class="muted">${esc(w.zh)}</span>
-        <span class="spacer"></span>${dueTxt}
-        <button class="speakbtn" onclick="event.stopPropagation();speak('${esc(w.word).replace(/'/g,"\\'")}')">🔊</button>
-        <button class="addw" title="查看詳解" onclick="openWordDetail(${DB.words.indexOf(w)})">👁</button></div>`;}).join('')}
-    </div>`;
+function renderHub(){
+  const p=DB.player, c=charOf();
+  const due=dueCards().length, nm=dueNightmares().length;
+  const pr=DB.prog;
+  const encName = pr.done?'已完結':(pr.enc<CH1.encounters.length?CH1.encounters[pr.enc].scene:'塔頂 · 最終對決');
+  $('scr-hub').innerHTML=`
+    <div class="flexrow" style="margin-bottom:12px">
+      <span style="font-size:30px">${c.emo}</span>
+      <div><b>${c.name}</b><div class="muted">🔥 連續調查 ${DB.streak.count} 天 · 經驗 ${p.xp}</div></div>
+      <span class="spacer"></span>
+      <button class="btn small ghost" onclick="openSettings()">⚙️</button>
+    </div>
+    ${statusBar()}
+    ${nm?`<div class="card" style="border-color:var(--bad)">
+      <div class="flexrow"><span style="font-size:26px">😱</span>
+      <div style="flex:1"><b>夢魘糾纏中(${nm})</b><div class="muted">過去答錯的題目在霧裡等你。淨化它們!</div></div>
+      <button class="btn small" onclick="startNightmares()">面對</button></div></div>`:''}
+    <div class="card">
+      <span class="tag amber">${CH1.title}</span>
+      <h3 class="serif" style="margin:8px 0 2px">${pr.done?'霧,暫時散了。':'下一站:'+encName}</h3>
+      <div class="muted">線索 🔎 ${pr.clues} · 進度 ${Math.min(pr.enc,ENC_TOTAL)} / ${ENC_TOTAL}</div>
+      <div class="progress"><i style="width:${Math.min(pr.enc/ENC_TOTAL*100,100)}%"></i></div>
+      ${pr.done
+        ? `<p class="muted">第二章《沉沒者的合唱》籌備中。先磨利你的英文吧。</p>
+           <button class="btn ghost" onclick="if(confirm('重新調查第一章?(牌庫與夢魘保留)')){DB.prog={ch:1,enc:0,clues:0,done:false};save();renderHub();}">🔁 重新調查第一章</button>`
+        : `<button class="btn" onclick="playNext()">${pr.enc===0?'⚓ 展開調查':'🕯 繼續調查'}</button>`}
+    </div>
+    <div class="card" id="daily-card">${dailyCardHTML()}</div>
+    <div class="flexrow">
+      <button class="btn blue" onclick="renderDeck()">🃏 牌庫(${DB.deck.length})${due?` · ${due} 待儀式`:''}</button>
+      <button class="btn ghost" onclick="renderSlang()">📓 俚語手帳(${DB.slang.length})</button>
+    </div>
+    <p class="muted center" style="margin-top:14px">答題正確率 ${DB.gstats.total?Math.round(DB.gstats.correct/DB.gstats.total*100)+'%':'–'} · 已淨化夢魘 ${DB.gstats.purified}</p>`;
+  showScr('hub');
 }
-async function openWordDetail(idx){
-  const w = DB.words[idx];
-  if(!w.data){ await lookupWord(w.word); return; }
-  vocabTab('lookup'); $('word-input').value = w.word;
-  $('word-result').innerHTML = wordCard(w.data, true);
-}
-/* ---- 間隔複習 (SRS) ---- */
-let reviewQueue = [];
-function startReview(){
-  reviewQueue = dueWords();
-  if(!reviewQueue.length) return toast('今天沒有到期的單字 ✓');
-  showView('vocab'); vocabTab('lib');
-  nextReviewCard();
-}
-function nextReviewCard(){
-  const c = $('vocab-lib');
-  if(!reviewQueue.length){
-    c.innerHTML = `<div class="card center"><div style="font-size:46px">🎉</div><h3>複習完成!</h3>
-      <p class="muted">記憶間隔已自動更新,明天見!</p>
-      <button class="btn" style="margin-top:10px" onclick="renderLibrary();renderHome()">回單字庫</button></div>`;
-    renderHome(); return;
+
+/* ================= 每日委託 ================= */
+function dailyCardHTML(){
+  const d=DB.daily;
+  if(d && d.date===todayStr()){
+    if(d.claimed) return `<b>📮 每日委託</b><p class="muted" style="margin:6px 0 0">今日委託已完成 ✓ 明天霧裡見。</p>`;
+    return `<b>📮 每日委託(已生成)</b><p class="muted" style="margin:6px 0 0">${esc(d.pack.story).slice(0,40)}…</p>
+      <div style="height:10px"></div><button class="btn small" onclick="openDaily()">接案 →</button>`;
   }
-  const w = reviewQueue[0];
-  c.innerHTML = `<div class="muted center" style="margin-bottom:10px">剩 ${reviewQueue.length} 個</div>
+  return `<b>📮 每日委託</b><p class="muted" style="margin:6px 0 10px">每天一樁小事件:新單字 + 俚語 + 一道謎題。</p>
+    <button class="btn small" onclick="genDaily()">查看今日委託 ✨</button>`;
+}
+async function genDaily(){
+  const known=DB.deck.slice(-30).map(c=>c.word).join(', ')||'(無)';
+  const pack=await withLoading('郵差正穿過霧…',()=>gemini(
+`你是1920年代台灣霧港背景的偵探遊戲編劇兼英文老師。學生程度:${DB.settings.level}。已學單字:${known}。
+生成今日委託 JSON(說明用繁體中文台灣用語):
+{"story":"霧港小事件敘述,偵探詭異氛圍,60字內,繁中",
+"word":{"word":"程度適合的實用新單字(避開已學)","zh":"中文意思","pos":"n.|v.|adj.|adv.","example_en":"例句","example_zh":"翻譯","usage":"用法與常見搭配40字內"},
+"slang":{"phrase":"一句道地英文俚語或口語表達","zh":"意思","example_en":"例句","example_zh":"翻譯"},
+"question":{"q":"與故事相關的英文文法題(克漏字用____)","options":["4個英文選項"],"answer":0,"explain":"繁中詳解80字內"}}`));
+  if(!pack) return;
+  DB.daily={date:todayStr(), pack, claimed:false}; save();
+  $('daily-card').innerHTML=dailyCardHTML();
+  openDaily();
+}
+function openDaily(){
+  const d=DB.daily; if(!d) return;
+  const p=d.pack;
+  $('scr-play').innerHTML=`
+    <div class="backrow"><button class="backbtn" onclick="renderHub()">← 回事務所</button></div>
+    <div class="card"><span class="tag amber">📮 每日委託 · ${esc(d.date)}</span>
+      <p class="story" style="margin:10px 0 0">${esc(p.story)}</p></div>
+    <div class="card"><b>📦 委託報酬:新單字卡</b>
+      <div class="minirow" style="margin-top:8px"><b class="en" style="font-size:18px">${esc(p.word.word)}</b>
+        <span class="tag">${esc(p.word.pos)}</span><span class="muted">${esc(p.word.zh)}</span>
+        <button class="speakbtn" style="margin-left:auto" onclick="speak('${qesc(p.word.word)}')">🔊</button></div>
+      <div class="clue en">${esc(p.word.example_en)} <button class="speakbtn" onclick="speak('${qesc(p.word.example_en)}')">🔊</button>
+        <div class="muted">${esc(p.word.example_zh)}</div></div>
+      <div class="muted">💡 ${esc(p.word.usage)}</div></div>
+    <div class="card"><b>🗣 街頭俚語</b>
+      <div class="minirow" style="margin-top:8px"><b class="en">${esc(p.slang.phrase)}</b>
+        <span class="muted">${esc(p.slang.zh)}</span>
+        <button class="speakbtn" style="margin-left:auto" onclick="speak('${qesc(p.slang.phrase)}')">🔊</button></div>
+      <div class="muted en">${esc(p.slang.example_en)}</div><div class="muted">${esc(p.slang.example_zh)}</div></div>
+    <div class="card"><b>🧩 委託謎題</b><div id="daily-q" style="margin-top:10px"></div></div>`;
+  showScr('play');
+  renderQuestion($('daily-q'), p.question, {kind:'daily', onDone:(ok)=>{
+    addCard(p.word);
+    if(!DB.slang.find(s=>s.phrase===p.slang.phrase)) DB.slang.push(p.slang);
+    DB.daily.claimed=true; gainXP(ok?'will':null, ok?2:1); save();
+    $('daily-q').insertAdjacentHTML('beforeend',
+      `<div class="tokenpop" style="margin-top:6px">獲得單字卡 + 俚語 ✓</div>
+       <div style="height:12px"></div><button class="btn" onclick="renderHub()">收工,回事務所</button>`);
+  }});
+}
+
+/* ================= 卡牌 ================= */
+function cardEffect(pos){
+  if(/v/.test(pos||'')) return {key:'verb', label:'⚡ 行動:答對時額外 +1 線索/傷害'};
+  if(/adj|adv/.test(pos||'')) return {key:'shield', label:'🛡 增益:下次答錯免受傷'};
+  return {key:'item', label:'🔦 道具:刪去一個錯誤選項'};
+}
+function addCard(w){
+  if(DB.deck.find(c=>c.word.toLowerCase()===w.word.toLowerCase())) return false;
+  DB.deck.push({word:w.word, zh:w.zh, pos:w.pos||'n.', example_en:w.example_en||'', example_zh:w.example_zh||'',
+    usage:w.usage||'', dusty:false, restedUntil:0, srs:{level:0, next:Date.now()+SRS[0]*DAY}});
+  save(); return true;
+}
+function refreshDust(){ const n=Date.now();
+  DB.deck.forEach(c=>{ if(c.srs.next<=n-2*DAY) c.dusty=true; }); save();
+}
+function renderDeck(){
+  refreshDust();
+  const due=dueCards();
+  $('scr-deck').innerHTML=`
+    <div class="backrow"><button class="backbtn" onclick="renderHub()">← 回事務所</button></div>
+    <h2 class="serif" style="font-size:22px">🃏 我的牌庫</h2>
+    <p class="muted" style="margin:4px 0 14px">每張卡都是你學會的單字。到期不複習會「蒙塵」失效——用記憶儀式擦亮它。</p>
+    ${due.length?`<button class="btn" style="margin-bottom:14px" onclick="startRitual()">🕯 記憶儀式(${due.length} 張到期)</button>`:''}
+    ${DB.deck.length?`<div class="card">${[...DB.deck].sort((a,b)=>a.srs.next-b.srs.next).map(c=>{
+      const fx=cardEffect(c.pos);
+      return `<div class="minirow"><b class="en">${esc(c.word)}</b><span class="tag">${esc(c.pos)}</span>
+        <span class="muted">${esc(c.zh)}</span><span class="spacer"></span>
+        ${c.dusty?'<span class="tag" style="background:#2A2A2A;color:#888">蒙塵</span>':`<span class="muted" style="font-size:11.5px">${fx.label.split(':')[0]}</span>`}
+        <button class="speakbtn" onclick="speak('${qesc(c.word)}')">🔊</button></div>`;}).join('')}</div>`
+    :`<div class="empty"><span class="emo">🌫</span>牌庫還是空的。<br>去冒險中破譯單字,它們會化為你的卡牌。</div>`}`;
+  showScr('deck');
+}
+/* 記憶儀式 = SRS 複習 */
+let ritualQ=[];
+function startRitual(){ ritualQ=dueCards(); if(!ritualQ.length) return toast('沒有到期的卡');
+  nextRitual(); }
+function nextRitual(){
+  if(!ritualQ.length){
+    $('scr-deck').innerHTML=`<div class="card center"><div style="font-size:44px">🕯</div>
+      <h3 class="serif">儀式完成</h3><p class="muted">所有卡牌重新泛起微光。</p>
+      <button class="btn" style="margin-top:10px" onclick="renderDeck()">回牌庫</button></div>`;
+    return;
+  }
+  const c=ritualQ[0];
+  $('scr-deck').innerHTML=`
+    <div class="muted center" style="margin:10px 0">記憶儀式 · 剩 ${ritualQ.length} 張</div>
     <div class="card center">
-      <div class="w en" style="font-size:34px;font-weight:800">${esc(w.word)}</div>
-      <button class="speakbtn" style="margin:8px auto" onclick="speak('${esc(w.word).replace(/'/g,"\\'")}')">🔊</button>
-      <div id="rv-answer" style="display:none;margin:6px 0 4px"><span class="tag" style="font-size:15px">${esc(w.zh)}</span></div>
-      <div id="rv-btns" style="margin-top:12px">
-        <button class="btn ghost" onclick="$('rv-answer').style.display='';$('rv-btns').innerHTML=revBtns()">顯示答案</button>
-      </div>
-    </div>`;
+      <div class="en" style="font-size:32px;font-weight:800">${esc(c.word)}</div>
+      <button class="speakbtn" style="margin:8px auto" onclick="speak('${qesc(c.word)}')">🔊</button>
+      <div id="rt-ans" style="display:none;margin:6px 0"><span class="tag" style="font-size:15px">${esc(c.zh)}</span>
+        ${c.example_en?`<div class="clue en" style="text-align:left">${esc(c.example_en)}<div class="muted">${esc(c.example_zh)}</div></div>`:''}</div>
+      <div id="rt-btns" style="margin-top:12px">
+        <button class="btn ghost" onclick="$('rt-ans').style.display='';$('rt-btns').innerHTML='<div class=flexrow><button class=\\'btn ghost\\' style=\\'color:var(--bad)\\' onclick=gradeRitual(false)>✗ 忘了</button><button class=\\'btn blue\\' onclick=gradeRitual(true)>✓ 記得</button></div>'">顯示答案</button>
+      </div></div>`;
+  showScr('deck');
 }
-function revBtns(){ return `<div class="flexrow">
-  <button class="btn amber" onclick="gradeReview(false)">✗ 忘記了</button>
-  <button class="btn" onclick="gradeReview(true)">✓ 記得</button></div>`; }
-function gradeReview(ok){
-  const w = reviewQueue.shift();
-  if(ok){ w.srs.level = Math.min(w.srs.level+1, SRS_INTERVALS.length-1); }
-  else { w.srs.level = 0; }
-  w.srs.next = Date.now() + SRS_INTERVALS[w.srs.level]*DAY;
-  save(); nextReviewCard();
+function gradeRitual(ok){
+  const c=ritualQ.shift();
+  c.srs.level = ok? Math.min(c.srs.level+1,SRS.length-1) : 0;
+  c.srs.next = Date.now()+SRS[c.srs.level]*DAY;
+  c.dusty=false; save(); nextRitual();
 }
 
-/* ================= 文法模組 ================= */
-const GRAMMAR_TOPICS = ['現在式','過去式','未來式','be 動詞','助動詞','介系詞','冠詞','可數/不可數','比較級','綜合測驗'];
-let grammarState = {active:false, qs:[], i:0, correct:0, topic:'', fromErrbook:false};
-function renderGrammarSetup(){
-  grammarState.active = false;
-  $('grammar-body').innerHTML = `
-    <div class="card">
-      <h4 style="margin:0 0 10px;color:var(--blue-ink)">選一個主題</h4>
-      <div id="g-topics">${GRAMMAR_TOPICS.map((t,i)=>`<button class="chip ${i===9?'on':''}" data-t="${t}" onclick="pickTopic(this)">${t}</button>`).join('')}</div>
-      <div class="divider"></div>
-      <div class="flexrow"><span class="muted">程度:</span>
-        <select class="field" id="g-level" style="flex:1;padding:10px 14px">
-          ${['國小三、四年級','國小五、六年級','國中入門'].map(l=>`<option ${DB.settings.level===l?'selected':''}>${l}</option>`).join('')}
-        </select></div>
-      <div style="height:14px"></div>
-      <button class="btn" onclick="startGrammar()">開始練習(5 題)🚀</button>
-    </div>
-    ${DB.wrong.length?`<button class="btn ghost" onclick="goErrbook()">📕 複習錯題本(${DB.wrong.length} 題)</button>`:''}
-    ${DB.stats.sessions?`<p class="muted center" style="margin-top:12px">累計練習 ${DB.stats.sessions} 回 · 整體答對率 ${Math.round(DB.stats.grammarCorrect/DB.stats.grammarTotal*100)}%</p>`:''}`;
+/* ================= 答題引擎(共用) ================= */
+let pending={remove:false, bonus:false, shield:false};
+function handHTML(){
+  const n=Date.now();
+  const avail=DB.deck.filter(c=>!c.dusty && c.restedUntil<n);
+  if(!avail.length) return '';
+  const hand=avail.sort(()=>Math.random()-.5).slice(0,3);
+  return `<div class="muted" style="margin-top:8px">🃏 打出一張手牌助你一臂之力(每張每日一次):</div>
+    <div class="hand">${hand.map(c=>{const fx=cardEffect(c.pos);
+      return `<button class="pcard" id="hc-${esc(c.word)}" onclick="playCard('${qesc(c.word)}')">
+        <b class="en">${esc(c.word)}</b><span class="zh">${esc(c.zh)}</span><span class="fx">${fx.label}</span></button>`;}).join('')}</div>`;
 }
-function pickTopic(btn){ document.querySelectorAll('#g-topics .chip').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); }
-async function startGrammar(){
-  const topic = document.querySelector('#g-topics .chip.on')?.dataset.t || '綜合測驗';
-  DB.settings.level = $('g-level').value; save();
-  const qs = await withLoading('AI 出題中…', ()=>gemini(
-`你是台灣的英文老師,為程度「${DB.settings.level}」的學生出 5 題英文文法選擇題,主題:「${topic}」。
-題目要有變化(選擇與克漏字混合,克漏字用 ____ 表示空格)。
-回傳 JSON 陣列:[{"q":"題目(英文句子,可含簡短中文情境提示)","options":["A","B","C","D"](4個英文選項),"answer":0(正確選項的索引0-3),"explain":"用繁體中文詳細解釋文法觀念:為什麼這個對、其他為什麼錯(100字內,親切口吻)"}]`));
-  if(!qs || !Array.isArray(qs)) return;
-  grammarState = {active:true, qs, i:0, correct:0, topic, fromErrbook:false};
-  renderQuestion();
+function playCard(word){
+  const c=DB.deck.find(x=>x.word===word); if(!c) return;
+  const fx=cardEffect(c.pos);
+  c.restedUntil=endOfDay(); save();
+  const el=document.getElementById('hc-'+word); if(el) el.classList.add('used');
+  if(fx.key==='item'){
+    const wrongs=[...document.querySelectorAll('.opt:not(.gone)')].filter(b=>b.dataset.ok!=='1');
+    if(wrongs.length>1) rnd(wrongs).classList.add('gone');
+    toast(`🔦 ${word}:排除了一個錯誤選項`);
+  }else if(fx.key==='verb'){ pending.bonus=true; toast(`⚡ ${word}:答對將獲得額外獎勵`); }
+  else { pending.shield=true; toast(`🛡 ${word}:下次答錯不會受傷`); }
 }
-function renderQuestion(){
-  const s = grammarState, q = s.qs[s.i];
-  $('grammar-body').innerHTML = `
-    <div class="flexrow"><span class="tag">${esc(s.topic)}</span><span class="spacer"></span>
-      <span class="muted">第 ${s.i+1} / ${s.qs.length} 題</span></div>
-    <div class="progress"><i style="width:${(s.i)/s.qs.length*100}%"></i></div>
-    <div class="card"><div class="en" style="font-size:18px;font-weight:700;line-height:1.7">${esc(q.q)}</div></div>
-    <div id="opts">${q.options.map((o,i)=>`
-      <button class="opt" onclick="answer(${i})"><span class="mk">${'ABCD'[i]}</span><span class="en">${esc(o)}</span></button>`).join('')}
-    </div>
-    <div id="after"></div>`;
+const CHAOS=[{t:'+1',v:1},{t:'+1',v:1},{t:'0',v:0},{t:'+2',v:2},{t:'★ 古印',v:1,star:true}];
+function renderQuestion(container, q, opts){
+  pending={remove:false,bonus:false,shield:false};
+  q.answer = Number(q.answer); // 正規化:防止 AI 回傳字串型別的索引
+  if(!Number.isInteger(q.answer) || q.answer<0 || q.answer>=(q.options||[]).length) q.answer=0;
+  container.innerHTML=`
+    ${q.clue?`<div class="clue en">${esc(q.clue)} <button class="speakbtn" onclick="speak('${qesc(q.clue)}')">🔊</button></div>`:''}
+    <div style="font-weight:700; font-size:16.5px" class="${q.clue?'':'en'}">${esc(q.q)}</div>
+    <div id="q-opts" style="margin-top:12px">${q.options.map((o,i)=>`
+      <button class="opt" data-ok="${i===q.answer?1:0}" onclick="judge(this,${i})">
+        <span class="mk">${'ABCD'[i]}</span><span class="${/[a-zA-Z]/.test(o)?'en':''}">${esc(o)}</span></button>`).join('')}</div>
+    ${opts.kind==='nightmare'?'':handHTML()}
+    <div id="q-after"></div>`;
+  container._q=q; container._opts=opts;
+  window._qc=container;
 }
-function answer(pick){
-  const s = grammarState, q = s.qs[s.i];
-  const ok = pick === q.answer;
-  document.querySelectorAll('#opts .opt').forEach((b,i)=>{
-    b.disabled = true;
-    if(i===q.answer){ b.classList.add('correct'); b.querySelector('.mk').textContent='✓'; }
-    if(i===pick && !ok){ b.classList.add('wrong'); b.querySelector('.mk').textContent='✗'; }
+function judge(btn,pick){
+  const c=window._qc, q=c._q, o=c._opts;
+  const ok = pick===q.answer;
+  DB.gstats.total++; if(ok) DB.gstats.correct++;
+  document.querySelectorAll('#q-opts .opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(b.dataset.ok==='1'){ b.classList.add('correct'); b.querySelector('.mk').textContent='✓'; }
+    if(i===pick&&!ok){ b.classList.add('wrong'); b.querySelector('.mk').textContent='✗'; }
   });
-  if(ok) s.correct++;
-  DB.stats.grammarTotal++; if(ok) DB.stats.grammarCorrect++;
-  if(!ok && !s.fromErrbook){
-    DB.wrong.push({q:q.q, options:q.options, answer:q.answer, explain:q.explain, topic:s.topic, ts:Date.now()});
+  let extra='';
+  if(ok && o.kind!=='nightmare' && o.kind!=='daily'){
+    const tk=rnd(CHAOS);
+    let gain=1+tk.v+(pending.bonus?1:0);
+    extra=`<div class="tokenpop">混沌符記:${tk.t} → 獲得 ${gain} 線索${tk.star?' · 古印共鳴!':''}</div>`;
+    o._gain=gain;
   }
-  if(ok && s.fromErrbook && q._wrongIdx!==undefined){ s.removeIdx.push(q._wrongIdx); }
+  if(!ok && o.kind!=='daily'){
+    if(pending.shield){ extra=`<div class="tokenpop">🛡 護盾擋下了傷害</div>`; }
+    else o._hurt=true;
+    if(o.kind!=='nightmare') addNightmare(q, o.topic||'');
+  }
   save();
-  $('after').innerHTML = `
-    <div class="explain"><b>${ok?'✓ 答對了!':'✗ 答錯囉,看看為什麼:'}</b><br>${esc(q.explain)}</div>
-    <button class="btn" onclick="nextQuestion()">${s.i+1<s.qs.length?'下一題 →':'看成績 🏁'}</button>`;
+  $('q-after').innerHTML=`
+    <div class="explain"><b>${ok?'✓ 答對了!':'✗ 答錯了——記住這個觀念:'}</b><br>${esc(q.explain)}</div>
+    ${extra}<div style="height:12px"></div>
+    <button class="btn" id="q-next">繼續 →</button>`;
+  $('q-next').onclick=()=>o.onDone(ok);
 }
-function nextQuestion(){
-  const s = grammarState;
-  s.i++;
-  if(s.i < s.qs.length) return renderQuestion();
-  // 結算
-  if(s.fromErrbook && s.removeIdx?.length){
-    DB.wrong = DB.wrong.filter((_,i)=>!s.removeIdx.includes(i)); save();
+function addNightmare(q, topic){
+  DB.nightmares.push({q:q.q, clue:q.clue||'', options:q.options, answer:q.answer, explain:q.explain,
+    topic, next:Date.now()+SRS[0]*DAY, fails:0});
+  save();
+}
+function gainXP(stat, n){
+  const p=DB.player; const before=p.xp; p.xp+=n||1;
+  // 每跨越一個 8 的倍數就提升一次屬性(用區間判斷,避免 +2 跳過門檻)
+  if(stat && Math.floor(p.xp/8) > Math.floor(before/8)){
+    const key = stat==='inv'?'inv' : stat==='talk'?'talk' : 'will';
+    p.stats[key]++; toast('📈 '+(key==='inv'?'調查':key==='talk'?'口才':'意志')+'提升!');
   }
-  if(!s.fromErrbook){ DB.stats.sessions++; save(); }
-  const pct = Math.round(s.correct/s.qs.length*100);
-  const msg = pct===100?'太強了,全對!🏆':pct>=80?'很棒,繼續保持!👏':pct>=60?'不錯喔,錯的觀念再看一下 💪':'沒關係,錯題本會幫你複習 📕';
-  $('grammar-body').innerHTML = `
-    <div class="card bigscore"><div class="muted">本回答對率</div><b>${pct}%</b>
-      <div style="font-size:17px;font-weight:700;margin-top:4px">${s.correct} / ${s.qs.length} 題 · ${msg}</div></div>
-    ${DB.wrong.length?`<button class="btn amber" onclick="goErrbook()">📕 去錯題本複習(${DB.wrong.length} 題)</button><div style="height:10px"></div>`:''}
-    <button class="btn" onclick="renderGrammarSetup()">再練一回 🔁</button>
-    <div style="height:10px"></div>
-    <button class="btn ghost" onclick="showView('home')">回首頁</button>`;
-  grammarState.active = false;
-  renderHome();
+  save();
 }
-function goErrbook(){
-  showView('grammar');
-  if(!DB.wrong.length){ renderGrammarSetup(); return toast('錯題本是空的,太棒了!'); }
-  $('grammar-body').innerHTML = `
-    <div class="card"><b>📕 錯題本(${DB.wrong.length} 題)</b>
-      <p class="muted" style="margin:6px 0 0">重練時答對的題目會自動從錯題本移除。</p></div>
-    ${DB.wrong.slice(0,30).map(w=>`<div class="card" style="padding:14px 16px">
-      <span class="tag amber">${esc(w.topic)}</span>
-      <div class="en" style="font-weight:700;margin-top:6px">${esc(w.q)}</div>
-      <div class="muted" style="margin-top:4px;font-size:13px">答案:${esc(w.options[w.answer])}</div></div>`).join('')}
-    <button class="btn amber" onclick="retryWrong()">🔁 重練錯題(最多 5 題)</button>
-    <div style="height:10px"></div>
-    <button class="btn ghost" onclick="renderGrammarSetup()">← 回文法練習</button>`;
-  grammarState.active = true;
-}
-function retryWrong(){
-  const picks = DB.wrong.map((w,i)=>({...w, _wrongIdx:i})).slice(0,5);
-  grammarState = {active:true, qs:picks, i:0, correct:0, topic:'錯題複習', fromErrbook:true, removeIdx:[]};
-  renderQuestion();
+function hurt(kind){
+  const p=DB.player;
+  if(kind==='hp') p.hp=Math.max(0,p.hp-1); else p.san=Math.max(0,p.san-1);
+  save();
+  if(p.hp===0||p.san===0){
+    p.hp=Math.max(p.hp,Math.ceil(p.maxhp/2)); p.san=Math.max(p.san,Math.ceil(p.maxsan/2)); save();
+    toast('你勉強撤回事務所喘口氣…(已恢復部分狀態)');
+  }
 }
 
-/* ================= 影集對白模組 ================= */
-function renderDrama(){
-  $('drama-body').innerHTML = `
-    <div class="card">
-      <input class="field en" id="drama-show" placeholder="影集名稱(選填,例如 Friends)">
+/* ================= 冒險流程 ================= */
+function playNext(){
+  const nm=dueNightmares();
+  if(nm.length){ startNightmares(true); return; }
+  const pr=DB.prog;
+  if(pr.enc < CH1.encounters.length){
+    if(pr.enc===0 && pr.clues===0) return showIntro();
+    runEncounter(CH1.encounters[pr.enc]);
+  } else if(!pr.done){ runBoss(); }
+}
+function showIntro(){
+  $('scr-play').innerHTML=`
+    <div class="backrow"><button class="backbtn" onclick="renderHub()">← 事務所</button></div>
+    <span class="tag amber">${CH1.title}</span>
+    ${img('bg-title.jpg','scene-img','霧港')}
+    <div class="card"><p class="story">${CH1.intro.replace(/\n/g,'<br><br>')}</p></div>
+    <button class="btn" onclick="runEncounter(CH1.encounters[0])">提起油燈,出發 🏮</button>`;
+  showScr('play');
+}
+function encHeader(e){
+  const isTall = e.img==='scene-lighthouse.jpg';
+  return `<div class="backrow"><button class="backbtn" onclick="renderHub()">← 撤回事務所(進度保留)</button></div>
+    ${statusBar()}
+    <span class="tag amber">${e.emo||'🏮'} ${esc(e.scene||e.name)}</span>
+    ${img(e.img, 'scene-img'+(isTall?' tall':''), e.scene)}
+    <div class="card"><p class="story">${esc(e.flavor)}</p></div>`;
+}
+
+/* ---- 調查遭遇(單字) ---- */
+async function runEncounter(e){
+  if(e.type==='investigate') return runInvestigate(e);
+  if(e.type==='combat') return runCombat(e);
+  if(e.type==='talk') return runTalk(e);
+}
+async function runInvestigate(e){
+  const qs=await withLoading('破譯字跡中…',()=>gemini(
+`你是英文老師兼1920年代偵探小說作家。為程度「${DB.settings.level}」的台灣學生出 ${e.n} 題單字題。
+場景:${e.scene}。素材主題:${e.theme}。氛圍:偵探詭異(不血腥)。
+每題給一句英文線索(日誌/警語/信件其中一句,內含一個目標單字),問該單字意思。單字要符合程度且實用。
+回傳 JSON 陣列:[{"clue":"英文線索句","q":"中文提問,例如:句中的 vanish 是什麼意思?","word":"目標單字","pos":"n.|v.|adj.|adv.","options":["繁中選項1","2","3","4"],"answer":0,"explain":"繁中詳解:單字意思、用法、常見搭配、記憶訣竅(90字內)","word_zh":"單字的中文意思","example_en":"另一個例句","example_zh":"例句翻譯"}]`));
+  if(!qs||!Array.isArray(qs)) return;
+  let i=0, got=0;
+  const step=()=>{
+    if(i>=qs.length) return finishInvestigate(e,got,qs);
+    $('scr-play').innerHTML=`${encHeader(e)}
+      <div class="muted">破譯 ${i+1} / ${qs.length}</div>
+      <div class="progress"><i style="width:${i/qs.length*100}%"></i></div>
+      <div class="card" id="q-box"></div>`;
+    showScr('play');
+    renderQuestion($('q-box'), qs[i], {kind:'inv', topic:'單字', onDone:(ok)=>{
+      if(ok){ DB.prog.clues += ($('q-box')._opts._gain||1); got++; gainXP('inv',1); }
+      else if($('q-box')._opts._hurt) hurt('san');
+      save(); i++; step();
+    }});
+  };
+  step();
+}
+function finishInvestigate(e,got,qs){
+  const newWords=qs.filter(q=>q.word && !DB.deck.find(c=>c.word.toLowerCase()===q.word.toLowerCase()));
+  $('scr-play').innerHTML=`${statusBar()}
+    <div class="card center"><div style="font-size:40px">🔎</div>
+      <h3 class="serif">${esc(e.scene)} · 調查完成</h3>
+      <p class="muted">破譯成功 ${got}/${qs.length} · 目前線索 ${DB.prog.clues}</p></div>
+    ${newWords.length?`<div class="card"><b>📦 破譯出的單字,收為卡牌:</b>
+      ${newWords.map(q=>`<div class="minirow"><b class="en">${esc(q.word)}</b><span class="tag">${esc(q.pos)}</span>
+        <span class="muted">${esc(q.word_zh)}</span>
+        <button class="speakbtn" style="margin-left:auto" onclick="speak('${qesc(q.word)}')">🔊</button></div>`).join('')}
       <div style="height:10px"></div>
-      <textarea class="field en" id="drama-text" placeholder="貼上一段英文對白,例如:&#10;Ross: We were on a break!&#10;Rachel: You said you wanted a break..."></textarea>
-      <div style="height:12px"></div>
-      <button class="btn" onclick="analyzeDrama()">🎬 逐句拆解</button>
-    </div>
-    <div id="drama-result"></div>`;
+      <button class="btn blue" id="take-cards">全部收入牌庫 🃏</button></div>`:''}
+    <button class="btn" onclick="advance()">前往下一站 →</button>`;
+  showScr('play');
+  const tb=$('take-cards');
+  if(tb) tb.onclick=()=>{ newWords.forEach(q=>addCard({word:q.word, zh:q.word_zh, pos:q.pos,
+      example_en:q.example_en, example_zh:q.example_zh, usage:''}));
+    tb.textContent='已收入 ✓'; tb.disabled=true; toast('卡牌入庫!'); };
 }
-async function analyzeDrama(){
-  const text = $('drama-text').value.trim();
-  if(!text) return toast('先貼上一段英文對白吧');
-  const show = $('drama-show').value.trim();
-  const data = await withLoading('AI 逐句分析中…', ()=>gemini(
-`你是台灣的英文老師,為程度「${DB.settings.level}」的學生逐句拆解這段${show?`出自影集《${show}》的`:''}英文對白:
-"""${text.slice(0,1500)}"""
-回傳 JSON(全部說明用繁體中文台灣用語):
-{"lines":[{"en":"原句","zh":"自然的中文翻譯","phrases":[{"p":"重點單字或片語","zh":"意思"}],"colloquial":"口語化表達或縮寫說明,如 gonna=going to(沒有就填空字串)","culture":"文化背景或梗的說明(沒有就填空字串)"}],
-"practice":[{"task":"模仿造句任務說明(中文)","sample":"示範英文句"}] (2個)}`));
-  if(!data) return;
-  $('drama-result').innerHTML = `
-    ${(data.lines||[]).map(l=>`<div class="card">
-      <div class="en" style="font-weight:700;font-size:16.5px">${esc(l.en)}
-        <button class="speakbtn" onclick="speak('${esc(l.en).replace(/'/g,"\\'")}')">🔊</button></div>
-      <div class="muted" style="margin:3px 0 6px">${esc(l.zh)}</div>
-      ${(l.phrases||[]).map(p=>`<div class="minirow"><b class="en">${esc(p.p)}</b><span class="muted">${esc(p.zh)}</span>
-        <button class="addw" onclick="addWordQuick('${esc(p.p).replace(/'/g,"\\'")}','${esc(p.zh).replace(/'/g,"\\'")}',this)">＋</button></div>`).join('')}
-      ${l.colloquial?`<div class="explain" style="margin-top:8px">🗣 ${esc(l.colloquial)}</div>`:''}
-      ${l.culture?`<div class="explain" style="margin-top:8px;border-color:var(--blue);background:var(--blue-soft)">🌏 ${esc(l.culture)}</div>`:''}
-    </div>`).join('')}
-    <div class="card"><b>✍️ 模仿造句練習</b>
-      ${(data.practice||[]).map(p=>`<div class="exrow" style="margin-top:10px"><div>${esc(p.task)}</div>
-        <div class="z en" style="margin-top:4px">示範:${esc(p.sample)}</div></div>`).join('')}
-    </div>`;
+function advance(){ DB.prog.enc++; save(); renderHub(); }
+
+/* ---- 對抗遭遇(文法) ---- */
+async function runCombat(e, boss){
+  const en = boss? CH1.boss : e.enemy;
+  const n = boss? CH1.boss.n : e.n;
+  const qs=await withLoading('霧中有東西在動…',()=>gemini(
+`你是英文老師。為程度「${DB.settings.level}」的台灣學生出 ${n} 題英文文法選擇題,主題混合(時態、助動詞、介系詞、冠詞、比較級、關係代名詞等,依程度)。
+題目句子的內容請帶有1920年代港口、霧、燈塔、神秘事件的氛圍(不血腥)。克漏字用 ____。
+回傳 JSON 陣列:[{"q":"題目英文句","options":["4個英文選項"],"answer":0,"explain":"繁中詳解:考哪個文法點、為何對、其他為何錯(100字內)","topic":"文法主題如:過去式"}]`));
+  if(!qs||!Array.isArray(qs)) return;
+  let i=0, ehp=en.hp;
+  const step=()=>{
+    if(ehp<=0) return winCombat(e,en,boss);
+    if(i>=qs.length){ // 題目用完未擊倒 → 再戰
+      $('scr-play').innerHTML=`${statusBar()}
+        <div class="card center"><div style="font-size:40px">${en.emo}</div>
+        <h3 class="serif">${esc(en.name)} 仍在霧中徘徊…</h3>
+        <p class="muted">它的低語還剩 ${ehp} 分力量。深呼吸,再次迎戰。</p>
+        <button class="btn" onclick="${boss?'runBoss()':'playNext()'}">再戰 ⚔️</button>
+        <div style="height:8px"></div>
+        <button class="btn ghost" onclick="renderHub()">先撤回事務所</button></div>`;
+      showScr('play'); return;
+    }
+    $('scr-play').innerHTML=`${encHeader(boss?CH1.boss:e)}
+      <div class="card"><div class="enemy"><span class="emo" id="enemy-emo">${en.emo}</span>
+        <div style="flex:1"><b>${esc(en.name)}</b>
+        <div class="bar"><i style="width:${ehp/en.hp*100}%"></i></div>
+        <div class="muted" style="font-size:12px">低語強度 ${ehp}/${en.hp} · 答對文法即可削弱它</div></div></div></div>
+      <div class="card" id="q-box"></div>`;
+    showScr('play');
+    renderQuestion($('q-box'), qs[i], {kind:'combat', topic:qs[i].topic||'文法', onDone:(ok)=>{
+      if(ok){ ehp -= 1+($('q-box')._opts._gain>2?1:0); gainXP('will',1);
+        const em=$('enemy-emo'); if(em) em.classList.add('shake'); }
+      else if($('q-box')._opts._hurt) hurt('hp');
+      i++; step();
+    }});
+  };
+  step();
+}
+function winCombat(e,en,boss){
+  if(boss) return chapterEnding();
+  DB.prog.clues+=2; save();
+  $('scr-play').innerHTML=`${statusBar()}
+    <div class="card center"><div style="font-size:44px">💨</div>
+      <h3 class="serif">${esc(en.name)} 散成了霧</h3>
+      <p class="muted">你的句子像火光一樣準確。線索 +2(目前 ${DB.prog.clues})</p></div>
+    <button class="btn" onclick="advance()">前往下一站 →</button>`;
+  showScr('play');
 }
 
-/* ================= 口說模組 ================= */
-const SCENARIOS = [
-  {id:'order', emo:'🍔', name:'餐廳點餐', en:'ordering food at a restaurant'},
-  {id:'intro', emo:'👋', name:'自我介紹', en:'introducing yourself to a new friend'},
-  {id:'way',   emo:'🗺️', name:'問路',     en:'asking for directions in a city'},
-  {id:'shop',  emo:'🛍️', name:'購物',     en:'shopping for clothes in a store'},
-  {id:'doc',   emo:'🏥', name:'看醫生',   en:'visiting a doctor with a cold'},
-];
-let speakState = {active:false, mode:'simple', scenario:null, history:[], live:null, transcript:[]};
-function renderSpeakSetup(){
-  speakState = {active:false, mode:speakState.mode||'simple', scenario:null, history:[], live:null, transcript:[]};
-  $('speak-body').innerHTML = `
-    <div class="seg">
-      <button id="sm-simple" class="${speakState.mode==='simple'?'on':''}" onclick="setSpeakMode('simple')">🎤 簡易模式(穩定)</button>
-      <button id="sm-live" class="${speakState.mode==='live'?'on':''}" onclick="setSpeakMode('live')">⚡ 即時對話(Live)</button>
-    </div>
-    <p class="muted" id="sm-desc" style="margin:0 0 12px"></p>
-    <div class="card"><b>選一個情境開始</b>
-      <div style="margin-top:12px">${SCENARIOS.map(s=>`
-        <button class="chip" onclick="startSpeak('${s.id}')">${s.emo} ${s.name}</button>`).join('')}</div>
-    </div>`;
-  setSpeakMode(speakState.mode);
+/* ---- 交涉遭遇(口說) ---- */
+let talkState=null;
+function talkSystem(e){
+  return `You are role-playing "${e.npc}" in a 1926 foggy harbor town detective story. You ONLY speak English, suited to a Taiwanese learner at ${DB.settings.level==='高中入門'?'high-school beginner':'junior high school'} level (short, clear sentences, max 2 per turn). Stay in character: a bit mysterious but kind. The player (a detective) is trying to: ${e.mission}. Reveal information gradually over about 3 exchanges. Mild eerie mood, never gory.`;
 }
-function setSpeakMode(m){
-  speakState.mode = m;
-  $('sm-simple')?.classList.toggle('on', m==='simple');
-  $('sm-live')?.classList.toggle('on', m==='live');
-  const d = $('sm-desc');
-  if(d) d.textContent = m==='simple'
-    ? '按住麥克風講英文 → AI 回覆並朗讀。最穩定,所有手機都能用。'
-    : '像打電話一樣即時語音對話(Gemini Live)。較吃網路,若連不上請改用簡易模式。';
+async function runTalk(e){
+  talkState={e, hist:[]};
+  const r=await withLoading('推開酒館的門…',()=>gemini(
+    `Open the scene with your first line to the detective. JSON: {"reply":"your English line","hint":"給玩家的繁中提示:可以怎麼用英文回(25字內)"}`,
+    {system:talkSystem(e)}));
+  if(!r){ renderHub(); return; }
+  talkState.hist.push({role:'ai',text:r.reply,hint:r.hint});
+  renderTalk(); speak(r.reply);
 }
-function startSpeak(id){
-  const sc = SCENARIOS.find(s=>s.id===id);
-  speakState.scenario = sc; speakState.active = true;
-  speakState.history = []; speakState.transcript = [];
-  if(speakState.mode === 'live') startLive(sc); else startSimple(sc);
-}
-/* ---- 簡易模式 ---- */
-function speakSystemPrompt(sc){
-  return `You are a friendly English conversation partner for a Taiwanese learner at elementary school level (grade 3-4). Role-play scenario: ${sc.en}. You start and lead the conversation. Use VERY simple English (short sentences, basic words). One or two sentences per turn. Be warm and encouraging.`;
-}
-function renderSimpleUI(){
-  const sc = speakState.scenario;
-  $('speak-body').innerHTML = `
-    <div class="flexrow" style="margin-bottom:12px"><span class="tag">${sc.emo} ${sc.name} · 簡易模式</span>
-      <span class="spacer"></span><button class="btn small amber" onclick="endSimple()">結束並看回饋</button></div>
-    <div class="chat" id="chat"></div>
-    <div class="center" style="margin:18px 0 6px">
+function renderTalk(){
+  const e=talkState.e;
+  $('scr-play').innerHTML=`${encHeader(e)}
+    <div class="muted">🎯 任務:${esc(e.mission)} · 對話 ${talkState.hist.filter(m=>m.role==='me').length}/3 回合後可結算</div>
+    ${e.npcImg?`<div style="text-align:center;margin:10px 0">${img(e.npcImg,'portrait-talk','Old Joe')}</div>`:''}
+    <div class="chat" id="talk-chat"></div>
+    <div class="center" style="margin:14px 0 4px">
       <button class="micbtn" id="mic"
         ontouchstart="micDown(event)" ontouchend="micUp(event)"
         onmousedown="micDown(event)" onmouseup="micUp(event)">🎤</button>
-      <p class="muted" style="margin-top:10px" id="mic-hint">按住說英文,放開送出</p>
-      <div class="flexrow" style="margin-top:8px">
-        <input class="field en" id="type-input" placeholder="或用打字的(備用)" style="flex:1">
-        <button class="btn small" onclick="sendTyped()">送出</button></div>
+      <p class="muted" style="margin-top:8px" id="mic-hint">按住,用英文開口</p>
+      <div class="flexrow"><input class="field en" id="type-input" placeholder="或打字(備用)" style="flex:1">
+        <button class="btn small blue" onclick="sendTyped()">送出</button></div>
+      <div style="height:10px"></div>
+      ${talkState.hist.filter(m=>m.role==='me').length>=2?'<button class="btn small" onclick="endTalk()">結束交涉,結算 →</button>':''}
     </div>`;
-  renderChat();
+  showScr('play');
+  drawChat();
 }
-function renderChat(){
-  $('chat').innerHTML = speakState.history.map(m=>
-    m.role==='ai'
+function drawChat(){
+  $('talk-chat').innerHTML=talkState.hist.map(m=> m.role==='ai'
     ? `<div class="bub ai"><span class="en">${esc(m.text)}</span>
-        <button class="speakbtn" style="width:30px;height:30px;font-size:14px" onclick="speak('${esc(m.text).replace(/'/g,"\\'")}')">🔊</button>
+        <button class="speakbtn" style="width:28px;height:28px;font-size:13px" onclick="speak('${qesc(m.text)}')">🔊</button>
         ${m.hint?`<div class="hint">💡 ${esc(m.hint)}</div>`:''}</div>`
     : `<div class="bub me en">${esc(m.text)}</div>`).join('');
-  window.scrollTo(0, document.body.scrollHeight);
+  window.scrollTo(0,document.body.scrollHeight);
 }
-async function startSimple(sc){
-  renderSimpleUI();
-  const r = await withLoading('AI 夥伴準備中…', ()=>gemini(
-    `Start the conversation now. Reply JSON: {"reply":"your opening line in simple English","hint":"給學生的中文小提示:可以怎麼回(20字內,繁體中文)"}`,
-    {system: speakSystemPrompt(sc)}));
-  if(!r){ renderSpeakSetup(); return; }
-  speakState.history.push({role:'ai', text:r.reply, hint:r.hint});
-  renderChat(); speak(r.reply);
-}
-let rec = null, recFinal = '';
-function micDown(e){
-  e.preventDefault();
-  if(!SR){ toast('此瀏覽器不支援語音輸入,請用下方打字'); return; }
-  speechSynthesis.cancel();
-  recFinal = '';
-  rec = new SR(); rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = true;
-  rec.onresult = ev=>{ let t=''; for(const r of ev.results) t += r[0].transcript; recFinal = t; };
-  rec.onerror = ev=>{ if(ev.error==='not-allowed') toast('請允許麥克風權限'); };
+let rec=null, recFinal='';
+function micDown(ev){ ev.preventDefault();
+  if(!SRX) return toast('此瀏覽器不支援語音,請用打字');
+  speechSynthesis.cancel(); recFinal='';
+  rec=new SRX(); rec.lang='en-US'; rec.interimResults=true; rec.continuous=true;
+  rec.onresult=e=>{let t='';for(const r of e.results)t+=r[0].transcript; recFinal=t;};
+  rec.onerror=e=>{ if(e.error==='not-allowed') toast('請允許麥克風權限'); };
   try{ rec.start(); $('mic').classList.add('rec'); $('mic-hint').textContent='聆聽中…放開送出'; }catch(_){}
 }
-function micUp(e){
-  e.preventDefault();
-  if(!rec) return;
-  rec.onend = ()=>{
-    $('mic').classList.remove('rec'); $('mic-hint').textContent='按住說英文,放開送出';
-    const t = recFinal.trim();
-    if(t) sendUserText(t); else toast('沒有聽清楚,再試一次');
-  };
-  try{ rec.stop(); }catch(_){ }
+function micUp(ev){ ev.preventDefault(); if(!rec) return;
+  rec.onend=()=>{ $('mic')?.classList.remove('rec'); const t=recFinal.trim();
+    if(t) sendTalk(t); else toast('沒聽清楚,再試一次'); };
+  try{ rec.stop(); }catch(_){}
 }
-function sendTyped(){
-  const v = $('type-input').value.trim();
-  if(!v) return; $('type-input').value='';
-  sendUserText(v);
-}
-async function sendUserText(text){
-  speakState.history.push({role:'me', text});
-  renderChat();
-  const convo = speakState.history.map(m=>(m.role==='ai'?'AI: ':'Student: ')+m.text).join('\n');
-  const r = await withLoading('AI 回覆中…', ()=>gemini(
-    `Conversation so far:\n${convo}\n\nContinue as the AI. Reply JSON: {"reply":"next line, simple English","hint":"中文小提示(20字內)"}`,
-    {system: speakSystemPrompt(speakState.scenario)}));
+function sendTyped(){ const v=$('type-input').value.trim(); if(!v)return; $('type-input').value=''; sendTalk(v); }
+async function sendTalk(text){
+  talkState.hist.push({role:'me',text}); drawChat();
+  const convo=talkState.hist.map(m=>(m.role==='ai'?'NPC: ':'Detective: ')+m.text).join('\n');
+  const r=await withLoading('Old Joe 瞇起眼…',()=>gemini(
+    `Conversation:\n${convo}\n\nContinue as the NPC. JSON: {"reply":"English line","hint":"繁中提示(25字內)"}`,
+    {system:talkSystem(talkState.e)}));
   if(!r) return;
-  speakState.history.push({role:'ai', text:r.reply, hint:r.hint});
-  renderChat(); speak(r.reply);
+  talkState.hist.push({role:'ai',text:r.reply,hint:r.hint});
+  renderTalk(); speak(r.reply);
 }
-async function endSimple(){
-  const mine = speakState.history.filter(m=>m.role==='me');
-  if(!mine.length){ renderSpeakSetup(); return; }
-  await showFeedback(speakState.history.map(m=>(m.role==='ai'?'AI: ':'Student: ')+m.text).join('\n'), false);
-}
-async function showFeedback(transcript, isLive){
-  const fb = await withLoading('整理學習回饋中…', ()=>gemini(
-`你是台灣的英文家教。以下是程度「${DB.settings.level}」學生的口說練習逐字稿(Student 是學生說的):
-"""${transcript.slice(0,3000)}"""
-請給溫暖具體的回饋,回傳 JSON(繁體中文台灣用語):
-{"good":["學生做得好的地方"](1-2點),
-"grammar":["文法修正:指出原句→正確說法→簡短說明"](1-3點,沒錯就稱讚),
-"better":["更道地的用詞或句型建議"](1-2點),
-"pron":["發音建議:根據用字推測學生可能唸不準的音,給中文提示"](1-2點),
-"cheer":"一句鼓勵的話"}`));
-  speakState.active = false;
-  DB.stats.speakSessions++; save();
-  if(!fb){ renderSpeakSetup(); return; }
-  const sec = (emo,title,arr)=> (arr&&arr.length)?`<div class="sec"><h4>${emo} ${title}</h4>${arr.map(x=>`<div class="exrow">${esc(x)}</div>`).join('')}</div>`:'';
-  $('speak-body').innerHTML = `
-    <div class="card"><b>📋 本次口說回饋${isLive?'(即時對話)':''}</b>
-      ${sec('👏','做得好', fb.good)}
-      ${sec('✏️','文法修正', fb.grammar)}
-      ${sec('💬','更道地的說法', fb.better)}
-      ${sec('🔊','發音提醒', fb.pron)}
-      <div class="explain" style="margin-top:12px">💙 ${esc(fb.cheer||'')}</div></div>
-    <button class="btn" onclick="renderSpeakSetup()">再練一個情境 🔁</button>
-    <div style="height:10px"></div>
-    <button class="btn ghost" onclick="showView('home')">回首頁</button>`;
+async function endTalk(){
+  const convo=talkState.hist.map(m=>(m.role==='ai'?'NPC: ':'Detective: ')+m.text).join('\n');
+  const fb=await withLoading('整理筆記與回饋…',()=>gemini(
+`你是台灣英文家教兼遊戲主持人。玩家(Detective)剛在偵探遊戲中用英文交涉,任務:「${talkState.e.mission}」。逐字稿:
+"""${convo.slice(0,3000)}"""
+回傳 JSON(繁中台灣用語):
+{"success":true或false(玩家是否大致達成任務,寬鬆認定,有開口努力就傾向成功),
+"info":"NPC 透露的劇情情報摘要(繁中,40字內,銜接『燈塔守失蹤』主線)",
+"good":["玩家英文表現好的地方"](1-2),
+"fix":["文法或用字修正:原句→正確說法→簡短說明"](1-3,沒錯就稱讚),
+"better":["更道地的說法建議"](1-2),
+"slang":{"phrase":"從對話情境延伸教一句道地英文口語/俚語","zh":"意思","example_en":"例句","example_zh":"翻譯"},
+"cheer":"一句鼓勵"}`));
+  if(!fb){ renderHub(); return; }
+  const ok=!!fb.success;
+  if(ok){ DB.prog.clues+=2; gainXP('talk',2); } else gainXP('talk',1);
+  if(fb.slang && !DB.slang.find(s=>s.phrase===fb.slang.phrase)) DB.slang.push(fb.slang);
+  save();
+  const sec=(emo,t,arr)=>(arr&&arr.length)?`<div style="margin-top:10px"><b>${emo} ${t}</b>${arr.map(x=>`<div class="clue" style="border-style:solid">${esc(x)}</div>`).join('')}</div>`:'';
+  $('scr-play').innerHTML=`${statusBar()}
+    <div class="card"><span class="tag ${ok?'':'amber'}">${ok?'✓ 交涉成功 · 線索 +2':'✗ Joe 沒有全說,但你學到了東西'}</span>
+      <p class="story" style="margin:10px 0 0">🗒 ${esc(fb.info||'')}</p></div>
+    <div class="card"><b>📋 口說回饋</b>
+      ${sec('👏','做得好',fb.good)}${sec('✏️','修正',fb.fix)}${sec('💬','更道地',fb.better)}
+      ${fb.slang?`<div style="margin-top:10px"><b>🗣 順手學一句</b>
+        <div class="minirow"><b class="en">${esc(fb.slang.phrase)}</b><span class="muted">${esc(fb.slang.zh)}</span>
+        <button class="speakbtn" style="margin-left:auto" onclick="speak('${qesc(fb.slang.phrase)}')">🔊</button></div>
+        <div class="muted en">${esc(fb.slang.example_en)}</div><div class="muted">${esc(fb.slang.example_zh)}</div></div>`:''}
+      <div class="explain" style="margin-top:10px">💙 ${esc(fb.cheer||'')}</div></div>
+    <button class="btn" onclick="advance()">前往下一站 →</button>`;
+  showScr('play');
 }
 
-/* ---- 即時對話(Gemini Live API,WebSocket)---- */
-class LiveSession {
-  constructor(sc){
-    this.sc = sc; this.ws = null; this.micStream = null;
-    this.inCtx = null; this.outCtx = null; this.proc = null;
-    this.playTime = 0; this.closed = false;
-    this.curIn = ''; this.curOut = '';
-  }
-  status(t){ const el = $('live-status'); if(el) el.textContent = t; }
-  async start(){
-    const key = apiKey(); if(!key) throw new Error('NO_KEY');
-    const model = DB.settings.liveModel;
-    this.status('連線中…');
-    this.ws = new WebSocket(`wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=${key}`);
-    this.ws.onopen = ()=>{
-      this.ws.send(JSON.stringify({setup:{
-        model: 'models/'+model,
-        generationConfig: {responseModalities: ['AUDIO']},
-        systemInstruction: {parts:[{text:
-          `You are a friendly English conversation partner for a Taiwanese child learner (elementary grade 3-4). Role-play: ${this.sc.en}. Speak VERY simple English, slowly, short sentences (max 2 per turn). Start the conversation by greeting the student. Be patient and encouraging. If the student is silent, gently prompt them.`}]},
-        outputAudioTranscription: {},
-        inputAudioTranscription: {}
-      }}));
-    };
-    this.ws.onmessage = async ev=>{
-      let data = ev.data;
-      if(data instanceof Blob) data = await data.text();
-      let msg; try{ msg = JSON.parse(data); }catch(_){ return; }
-      if(msg.setupComplete){ this.status('🟢 已連線,開口說話吧!'); await this.openMic(); return; }
-      const sc = msg.serverContent;
-      if(!sc) return;
-      if(sc.inputTranscription?.text){ this.curIn += sc.inputTranscription.text; this.renderLiveTranscript(); }
-      if(sc.outputTranscription?.text){ this.curOut += sc.outputTranscription.text; this.renderLiveTranscript(); }
-      if(sc.interrupted){ this.flushAudio(); }
-      const parts = sc.modelTurn?.parts || [];
-      for(const p of parts){
-        if(p.inlineData?.data) this.playPCM(p.inlineData.data);
-      }
-      if(sc.turnComplete){
-        if(this.curIn.trim()) speakState.transcript.push('Student: '+this.curIn.trim());
-        if(this.curOut.trim()) speakState.transcript.push('AI: '+this.curOut.trim());
-        this.curIn=''; this.curOut=''; this.renderLiveTranscript();
-      }
-    };
-    this.ws.onerror = ()=>{ if(!this.closed){ this.status('⚠️ 連線失敗'); toast('Live 連線失敗,建議改用「簡易模式」'); } };
-    this.ws.onclose = e=>{ if(!this.closed){ this.status('連線已中斷'); if(e.code!==1000) toast('Live 連線中斷('+e.code+'),可改用簡易模式'); } };
-  }
-  async openMic(){
-    try{
-      this.micStream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:1, echoCancellation:true, noiseSuppression:true}});
-    }catch(e){ this.status('⚠️ 無法使用麥克風'); toast('請允許麥克風權限後重試'); return; }
-    this.inCtx = new (window.AudioContext||window.webkitAudioContext)({sampleRate:16000});
-    const src = this.inCtx.createMediaStreamSource(this.micStream);
-    this.proc = this.inCtx.createScriptProcessor(4096, 1, 1);
-    this.proc.onaudioprocess = e=>{
-      if(this.ws?.readyState !== 1) return;
-      const f32 = e.inputBuffer.getChannelData(0);
-      const i16 = new Int16Array(f32.length);
-      for(let i=0;i<f32.length;i++){ const s = Math.max(-1, Math.min(1, f32[i])); i16[i] = s<0 ? s*0x8000 : s*0x7FFF; }
-      let bin=''; const bytes = new Uint8Array(i16.buffer);
-      for(let i=0;i<bytes.length;i+=8192) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+8192));
-      this.ws.send(JSON.stringify({realtimeInput:{audio:{data:btoa(bin), mimeType:'audio/pcm;rate=16000'}}}));
-    };
-    src.connect(this.proc); this.proc.connect(this.inCtx.destination);
-  }
-  playPCM(b64){
-    if(!this.outCtx) this.outCtx = new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});
-    const bin = atob(b64); const bytes = new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
-    const i16 = new Int16Array(bytes.buffer);
-    const f32 = new Float32Array(i16.length);
-    for(let i=0;i<i16.length;i++) f32[i] = i16[i]/32768;
-    const buf = this.outCtx.createBuffer(1, f32.length, 24000);
-    buf.copyToChannel(f32, 0);
-    const srcN = this.outCtx.createBufferSource(); srcN.buffer = buf; srcN.connect(this.outCtx.destination);
-    const now = this.outCtx.currentTime;
-    if(this.playTime < now) this.playTime = now + 0.05;
-    srcN.start(this.playTime); this.playTime += buf.duration;
-    this._sources = this._sources||[]; this._sources.push(srcN);
-  }
-  flushAudio(){ (this._sources||[]).forEach(s=>{try{s.stop()}catch(_){}}); this._sources=[]; this.playTime=0; }
-  renderLiveTranscript(){
-    const el = $('live-transcript'); if(!el) return;
-    const hist = speakState.transcript.map(t=>{
-      const me = t.startsWith('Student:');
-      return `<div class="bub ${me?'me':'ai'} en">${esc(t.replace(/^\w+: /,''))}</div>`;
-    }).join('');
-    const cur = (this.curOut?`<div class="bub ai en" style="opacity:.7">${esc(this.curOut)}</div>`:'')
-              + (this.curIn?`<div class="bub me en" style="opacity:.7">${esc(this.curIn)}</div>`:'');
-    el.innerHTML = hist + cur;
-    el.scrollTop = el.scrollHeight;
-  }
-  stop(){
-    this.closed = true;
-    try{ this.proc?.disconnect(); }catch(_){}
-    try{ this.micStream?.getTracks().forEach(t=>t.stop()); }catch(_){}
-    try{ this.inCtx?.close(); }catch(_){}
-    try{ this.outCtx?.close(); }catch(_){}
-    try{ this.ws?.close(1000); }catch(_){}
-  }
+/* ---- 頭目戰與章節結局 ---- */
+function runBoss(){
+  $('scr-play').innerHTML=`${statusBar()}
+    <span class="tag amber">${CH1.title} · 最終對決</span>
+    ${img(CH1.boss.img,'scene-img','燈室')}
+    <div class="card"><p class="story">${esc(CH1.boss.flavor)}</p></div>
+    <button class="btn" onclick="runCombat(null,true)">舉起油燈,直視它 ${CH1.boss.emo}</button>`;
+  showScr('play');
 }
-async function startLive(sc){
-  $('speak-body').innerHTML = `
-    <div class="flexrow" style="margin-bottom:12px"><span class="tag">${sc.emo} ${sc.name} · 即時對話</span>
-      <span class="spacer"></span><button class="btn small amber" onclick="endLive()">結束並看回饋</button></div>
-    <div class="card center" style="padding:14px">
-      <b id="live-status">準備中…</b>
-      <p class="muted" style="margin:6px 0 0">直接開口講英文,AI 會即時用語音回答你。<br>聽不懂可以說 "Can you say that again?"</p>
-    </div>
-    <div class="chat" id="live-transcript" style="max-height:48dvh;overflow:auto"></div>`;
-  speakState.live = new LiveSession(sc);
-  try{ await speakState.live.start(); }
-  catch(e){ toast('Live 啟動失敗,建議用簡易模式'); renderSpeakSetup(); }
+function chapterEnding(){
+  const trueEnd = DB.prog.clues >= CH1.cluesForTrue;
+  $('scr-play').innerHTML=`${statusBar()}
+    <div class="card center"><div style="font-size:48px">${CH1.boss.emo}</div>
+      <h3 class="serif">低語者退入了深霧</h3>
+      <p class="muted">你收集的線索:🔎 ${DB.prog.clues}</p></div>
+    <div class="card"><b>燈室裡,周百川的最後一頁日誌就在眼前。你——</b>
+      <div style="height:12px"></div>
+      <button class="btn" onclick="epilogue(${trueEnd?'true':'false'},1)">📖 讀完它,直面真相</button>
+      <div style="height:8px"></div>
+      <button class="btn ghost" onclick="epilogue(false,2)">🔥 燒了它,讓霧港安睡</button>
+      ${trueEnd?'<p class="muted" style="margin-top:10px">🔎 線索充足:你能看見「真結局」。</p>':'<p class="muted" style="margin-top:10px">線索不足 '+CH1.cluesForTrue+',真相仍有一層霧。(可重新調查收集更多)</p>'}
+    </div>`;
+  showScr('play');
 }
-async function endLive(){
-  speakState.live?.stop();
-  const tr = speakState.transcript.join('\n');
-  if(!tr.trim()){ renderSpeakSetup(); return; }
-  await showFeedback(tr, true);
+function epilogue(trueEnd, choice){
+  const txt = choice===2
+    ? '火舌捲走最後一個英文字母。霧,似乎淡了一點。但深夜的浪聲裡,你偶爾還是聽得見——有人在拼一個你沒學過的單字。'
+    : trueEnd
+      ? '日誌最後寫著:"The fog speaks. Learn its words, or be spoken." 周百川沒有失蹤——他走進霧裡,去「學它的語言」了。而現在,你的英文已經足以跟上他的腳步。第二章,海底傳來合唱。'
+      : '字跡被海水暈開,你只拼湊出一半:"...the fog... learn... or be..." 你需要更多線索、更強的英文,才能讀懂全貌。';
+  DB.prog.done=true; DB.prog.enc=ENC_TOTAL; save();
+  $('scr-play').innerHTML=`
+    <div class="card"><span class="tag amber">${trueEnd&&choice===1?'🌟 真結局':'結局'}</span>
+      <p class="story" style="margin:10px 0 0">${txt}</p></div>
+    <div class="card center"><b>第一章 完</b>
+      <p class="muted">答題正確率 ${DB.gstats.total?Math.round(DB.gstats.correct/DB.gstats.total*100)+'%':'–'} · 牌庫 ${DB.deck.length} 張 · 俚語 ${DB.slang.length} 句</p></div>
+    <button class="btn" onclick="renderHub()">回事務所</button>`;
+  showScr('play');
+}
+
+/* ---- 夢魘(錯題 SRS) ---- */
+let nmQueue=[], nmReturnToPlay=false;
+function startNightmares(thenPlay){
+  nmQueue=dueNightmares(); nmReturnToPlay=!!thenPlay;
+  if(!nmQueue.length) return;
+  nextNightmare();
+}
+function nextNightmare(){
+  if(!nmQueue.length){
+    $('scr-play').innerHTML=`<div class="card center"><div style="font-size:44px">🌅</div>
+      <h3 class="serif">夢魘暫退</h3><p class="muted">已淨化 ${DB.gstats.purified} 個夢魘。</p>
+      <button class="btn" onclick="${nmReturnToPlay?'playNext()':'renderHub()'}">${nmReturnToPlay?'繼續冒險 →':'回事務所'}</button></div>`;
+    showScr('play'); return;
+  }
+  const nm=nmQueue[0];
+  $('scr-play').innerHTML=`${statusBar()}
+    <span class="tag" style="background:#3A2412;color:var(--bad)">😱 夢魘來襲 · 剩 ${nmQueue.length}</span>
+    <div class="card"><p class="muted" style="margin:0 0 10px">這是你曾答錯的題目。答對,就能永遠淨化它。</p>
+      <div id="q-box"></div></div>`;
+  showScr('play');
+  renderQuestion($('q-box'), nm, {kind:'nightmare', onDone:(ok)=>{
+    const x=nmQueue.shift();
+    if(ok){ DB.nightmares=DB.nightmares.filter(n=>n!==x); DB.gstats.purified++; gainXP('will',2);
+      toast('✨ 夢魘淨化!'); }
+    else{ x.fails++; x.next=Date.now()+SRS[0]*DAY; hurt('san'); }
+    save(); nextNightmare();
+  }});
+}
+
+/* ================= 俚語手帳 ================= */
+function renderSlang(){
+  $('scr-slang').innerHTML=`
+    <div class="backrow"><button class="backbtn" onclick="renderHub()">← 回事務所</button></div>
+    <h2 class="serif" style="font-size:22px">📓 俚語手帳</h2>
+    <p class="muted" style="margin:4px 0 14px">交涉與每日委託中學到的道地口語。</p>
+    ${DB.slang.length?DB.slang.map(s=>`<div class="card" style="padding:14px 16px">
+      <div class="flexrow"><b class="en">${esc(s.phrase)}</b><span class="muted">${esc(s.zh)}</span>
+        <button class="speakbtn" style="margin-left:auto" onclick="speak('${qesc(s.phrase)}')">🔊</button></div>
+      <div class="muted en" style="margin-top:4px">${esc(s.example_en||'')}</div>
+      <div class="muted">${esc(s.example_zh||'')}</div></div>`).join('')
+    :`<div class="empty"><span class="emo">🍺</span>還沒收集到俚語。<br>去酒館跟 Old Joe 聊聊吧。</div>`}`;
+  showScr('slang');
 }
 
 /* ================= 設定 ================= */
 function openSettings(){
-  $('settings-sheet').innerHTML = `
+  $('settings-sheet').innerHTML=`
     <h3 style="font-size:20px">⚙️ 設定</h3>
-    <div class="sec"><h4>Gemini API 金鑰</h4>
-      <input class="field en" id="set-key" value="${esc(apiKey())}" placeholder="AIza...">
-    </div>
-    <div class="sec"><h4>我的程度(影響出題與解說)</h4>
-      <select class="field" id="set-level">
-        ${['國小三、四年級','國小五、六年級','國中入門'].map(l=>`<option ${DB.settings.level===l?'selected':''}>${l}</option>`).join('')}
-      </select></div>
-    <div class="sec"><h4>Live 語音模型(進階,連不上時可改)</h4>
-      <input class="field en" id="set-live" value="${esc(DB.settings.liveModel)}">
-    </div>
+    <div style="margin-top:12px"><b style="font-size:13.5px;color:var(--amber)">GEMINI API 金鑰</b>
+      <input class="field en" id="set-key" value="${esc(apiKey())}" placeholder="AIza..." style="margin-top:6px"></div>
+    <div style="margin-top:12px"><b style="font-size:13.5px;color:var(--amber)">學習難度</b>
+      <select class="field" id="set-level" style="margin-top:6px">
+        ${LEVELS.map(l=>`<option ${DB.settings.level===l?'selected':''}>${l}</option>`).join('')}</select></div>
     <div style="height:14px"></div>
-    <button class="btn" onclick="saveSettings()">儲存設定 ✓</button>
+    <button class="btn" onclick="saveSettings()">儲存 ✓</button>
     <div class="divider"></div>
     <div class="flexrow">
-      <button class="btn ghost" onclick="exportData()">📤 匯出紀錄</button>
-      <button class="btn ghost" onclick="$('import-file').click()">📥 匯入紀錄</button>
-    </div>
+      <button class="btn ghost" onclick="exportData()">📤 匯出進度</button>
+      <button class="btn ghost" onclick="$('import-file').click()">📥 匯入進度</button></div>
     <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(this)">
     <div style="height:10px"></div>
-    <button class="btn ghost" style="color:var(--bad)" onclick="resetAll()">🗑 清除全部資料</button>
-    <p class="muted" style="margin-top:12px;font-size:12.5px">學習紀錄都存在這支手機裡。換手機前記得「匯出紀錄」備份!</p>`;
+    <button class="btn ghost" style="color:var(--bad)" onclick="resetAll()">🗑 刪除存檔重新開始</button>
+    <p class="muted" style="margin-top:12px;font-size:12.5px">進度存在這支手機。換手機前先「匯出進度」備份。</p>`;
   $('settings-overlay').classList.add('show');
 }
 function saveSettings(){
-  const k = $('set-key').value.trim();
-  if(k) localStorage.setItem('ela_key', k);
-  DB.settings.level = $('set-level').value;
-  DB.settings.liveModel = $('set-live').value.trim() || DB.settings.liveModel;
-  save(); $('settings-overlay').classList.remove('show'); toast('設定已儲存 ✓');
+  const k=$('set-key').value.trim(); if(k) localStorage.setItem('fog_key',k);
+  DB.settings.level=$('set-level').value; save();
+  $('settings-overlay').classList.remove('show'); toast('已儲存 ✓');
 }
 function exportData(){
-  const blob = new Blob([JSON.stringify(DB,null,1)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `英語小日子備份-${todayStr()}.json`;
-  a.click(); URL.revokeObjectURL(a.href);
-  toast('已下載備份檔 ✓');
+  const blob=new Blob([JSON.stringify(DB,null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`霧港奇談存檔-${todayStr()}.json`; a.click(); URL.revokeObjectURL(a.href);
+  toast('已下載存檔 ✓');
 }
 function importData(input){
-  const f = input.files[0]; if(!f) return;
-  const fr = new FileReader();
-  fr.onload = ()=>{
-    try{
-      const d = JSON.parse(fr.result);
-      if(!Array.isArray(d.words)) throw 0;
-      DB = Object.assign(defaults(), d); save();
-      toast('匯入成功 ✓'); $('settings-overlay').classList.remove('show'); renderHome();
-    }catch(_){ toast('⚠️ 檔案格式不對,請選正確的備份檔'); }
-  };
+  const f=input.files[0]; if(!f)return;
+  const fr=new FileReader();
+  fr.onload=()=>{ try{ const d=JSON.parse(fr.result);
+      if(!Array.isArray(d.deck)) throw 0;
+      DB=Object.assign(defaults(),d); save(); toast('匯入成功 ✓');
+      $('settings-overlay').classList.remove('show');
+      DB.player?renderHub():renderCharSelect();
+    }catch(_){ toast('⚠️ 檔案格式不對'); } };
   fr.readAsText(f);
 }
 function resetAll(){
-  if(!confirm('確定要清除全部學習紀錄?此動作無法復原!')) return;
-  localStorage.removeItem('ela_data'); localStorage.removeItem('ela_key');
-  location.reload();
+  if(!confirm('確定刪除全部進度?無法復原!'))return;
+  localStorage.removeItem('fog_data'); localStorage.removeItem('fog_key'); location.reload();
 }
-
-/* ================= API Key 引導 ================= */
 function saveKey(){
-  const k = $('key-input').value.trim();
-  if(!k || !k.startsWith('AIza')) return toast('金鑰好像不對,應該是 AIza 開頭');
-  localStorage.setItem('ela_key', k);
-  $('key-overlay').classList.remove('show');
-  toast('設定完成,開始學習吧!🎉');
+  const k=$('key-input').value.trim();
+  if(!k||!k.startsWith('AIza')) return toast('金鑰好像不對,應為 AIza 開頭');
+  localStorage.setItem('fog_key',k);
+  $('key-overlay').classList.remove('show'); toast('燈塔亮了 🔦');
+  enterGame();
 }
 
-/* ================= 初始化 ================= */
+/* ================= 入口 ================= */
+function enterGame(){
+  if(!apiKey()){ $('key-overlay').classList.add('show'); return; }
+  updateStreak(); refreshDust();
+  if(!DB.player) renderCharSelect(); else { renderHub(); }
+}
 (function init(){
-  updateStreak();
-  renderHome();
-  if(!apiKey()) $('key-overlay').classList.add('show');
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
-  }
-  // Enter 快捷查詢
-  $('word-input').addEventListener('keydown', e=>{ if(e.key==='Enter') lookupWord(); });
-  // 離開口說頁時關閉 Live
-  document.addEventListener('visibilitychange', ()=>{ if(document.hidden && speakState.live){ speakState.live.stop(); } });
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('service-worker.js').catch(()=>{});
 })();
 
 </script>
