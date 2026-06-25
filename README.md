@@ -1,50 +1,45 @@
-# 英語小日子 · Daily English 📘
+# 霧港奇談 · Fog Harbor Tales 🏮
 
-一個給台灣學習者的個人化英文學習 PWA(漸進式網頁 App)。
-單一 HTML 檔、零後端、零建置流程,部署到 GitHub Pages 即可在 Android / iPhone 上「加到主畫面」當 App 用。
+一款「用英文當武器」的偵探卡牌冒險 PWA。1926 年的霧港,燈塔守失蹤了——破譯英文線索、用正確文法驅散霧影、開口跟只說英文的 NPC 交涉,才能查明真相。
 
-## ✨ 功能
-- 🏠 **首頁儀表板**:連續學習天數、統計、今日複習提醒、**每日 AI 學習包**(每天自動生成新內容)
-- 📖 **單字學習**:AI 詳解(KK 音標、例句、用法、同義/易混淆字)+ 單字庫 + 間隔複習(1/3/7/14 天 SRS)
-- ✏️ **文法練習**:AI 依程度出題、中文詳解、**錯題本**自動收錄
-- 🎬 **影集對白學習**:逐句翻譯、口語縮寫、文化梗解說、一鍵加入單字庫
-- 🎙️ **口說練習**:雙模式——簡易模式(語音辨識 + AI 回覆 + 朗讀)與即時對話(Gemini Live API),結束後給中文回饋
-- 💾 學習紀錄存在手機 localStorage,可**匯出 / 匯入**備份
-- 📴 離線可開啟介面(AI 功能需連線)
-- 🎨 色弱友善配色:對錯用「藍✓ / 橘✗ + 圖示」雙重標示
+## 🎮 玩法 = 學習
+- 🔍 **調查檢定** = 單字題(破譯日誌與警語),破譯出的字化為**卡牌**收進牌庫
+- ⚔️ **對抗怪異** = 文法題,答對即是攻擊;每題附完整繁中詳解
+- 🗣️ **人物交涉** = 口說關卡:按住麥克風用英文對話(可打字備援),結算給文法/用詞修正 + 教一句**俚語**
+- 🃏 **卡牌策略**:名詞=道具、動詞=行動、形容詞=護盾;混沌符記決定獎勵多寡(答對永遠是答對)
+- 😱 **夢魘系統**:答錯的題目化為夢魘,按 1/3/7/14 天間隔回來糾纏,答對才能淨化(錯題本 + 間隔複習)
+- 🕯 **記憶儀式**:單字卡到期不複習會蒙塵失效,每日複習擦亮它(SRS)
+- 📮 **每日委託**:每天 AI 生成新事件:新單字 + 俚語 + 謎題
+- 難度:國中基礎 / 國中進階 / 高中入門(設定可調)
 
-## 🚀 部署到 GitHub Pages(5 分鐘)
+## 📁 檔案結構(部署時請保持這個結構)
+```
+（repo 第一層）
+├── index.html
+├── manifest.json
+├── service-worker.js
+├── icon-192.png
+├── icon-512.png
+└── img/              ← 圖片資料夾,整個放進去
+    ├── bg-title.jpg
+    ├── char-rep.jpg / char-doc.jpg / char-stu.jpg
+    ├── npc-joe.jpg / npc-gu.jpg
+    ├── card-back.jpg
+    └── scene-*.jpg （6 張場景）
+```
+> 圖片若有缺,遊戲會自動以文字/emoji 替代,不會壞掉。
 
-1. **建立 GitHub 帳號**(已有可跳過):https://github.com/signup
-2. **建立新 repository**
-   - 右上角「+」→「New repository」
-   - Repository name 取名,例如 `english-app`
-   - 選 **Public** → 按「Create repository」
-3. **上傳檔案**
-   - 在 repo 頁面點「uploading an existing file」
-   - 把這 5 個檔案全部拖進去:
-     `index.html`、`manifest.json`、`service-worker.js`、`icon-192.png`、`icon-512.png`
-   - 按「Commit changes」
-4. **開啟 GitHub Pages**
-   - repo 上方「Settings」→ 左側「Pages」
-   - Source 選「Deploy from a branch」,Branch 選 `main`、資料夾選 `/ (root)` → Save
-   - 等 1–2 分鐘,頁面上方會出現網址:
-     `https://你的帳號.github.io/english-app/`
-5. **手機安裝**
-   - **Android(Chrome)**:打開網址 → 右上角「⋮」→「加到主畫面」(或會自動跳出安裝提示)
-   - **iPhone(Safari)**:打開網址 → 分享按鈕 →「加入主畫面」
+## 🚀 部署到 GitHub Pages
+1. 建立 **Public** repository
+2. 把 5 個檔案 + 整個 `img` 資料夾上傳到 repo **第一層**
+   （在 GitHub 網頁可直接把 `img` 資料夾拖進去;或用 Add file → Upload files 保留資料夾結構）
+3. Settings → Pages → Source「Deploy from a branch」→ `main` + `/ (root)` → Save
+4. 等 1–2 分鐘,開啟 `https://你的帳號.github.io/repo名稱/`
+5. Android Chrome:右上「⋮」→「加到主畫面」即可像 App 遊玩
 
-## 🔑 取得免費 Gemini API 金鑰
-1. 打開 https://aistudio.google.com/app/apikey
-2. 用 Google 帳號登入 → 「Create API key」
-3. 第一次打開 App 時把金鑰貼進去即可(只存在你的手機,不會上傳)
+## 🔑 API 金鑰
+第一次開啟會引導你貼上免費的 Google Gemini API key（https://aistudio.google.com/app/apikey）。金鑰只存在你的手機 localStorage,不會上傳。請勿把金鑰寫進程式碼或公開分享。
+⚠️ AI 功能（出題、劇情、對話）需要網路,且必須在 https 環境（GitHub Pages）才能運作——直接開檔案或預覽會出現 Failed to fetch。
 
-> ⚠️ 安全提醒:金鑰是你個人的,**不要**貼到程式碼裡或公開分享。建議在 Google AI Studio 為金鑰設定用量限制。
-
-## 📦 更新 App
-之後若要更新,把新的 `index.html` 重新上傳到 repo 覆蓋即可。手機端重新整理一次(或關掉重開兩次)就會拿到新版。
-
-## ❓ 常見問題
-- **Live 即時對話連不上?** 換到「簡易模式」一樣能練口說;或到 ⚙️ 設定裡更換 Live 模型名稱(Google 偶爾會更新模型版本)。
-- **語音輸入沒反應?** 確認瀏覽器麥克風權限已允許;iPhone Safari 對語音辨識支援較弱,可用打字備援。
-- **換手機怎麼辦?** ⚙️ 設定 →「匯出紀錄」下載備份檔,新手機「匯入紀錄」即可還原。
+## 💾 進度
+存檔在手機本機。設定 →「匯出進度」可下載備份 JSON,換手機用「匯入進度」還原。

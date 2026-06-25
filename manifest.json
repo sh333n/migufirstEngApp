@@ -1,13 +1,13 @@
 {
-  "name": "英語小日子 · Daily English",
-  "short_name": "英語小日子",
-  "description": "個人化英文學習:單字、文法、影集對白、口說練習",
+  "name": "霧港奇談 · Fog Harbor Tales",
+  "short_name": "霧港奇談",
+  "description": "用英文破解霧港謎案的學習卡牌冒險",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#FAF7F1",
-  "theme_color": "#FAF7F1",
+  "background_color": "#0E1520",
+  "theme_color": "#0E1520",
   "lang": "zh-Hant-TW",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
